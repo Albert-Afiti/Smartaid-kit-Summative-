@@ -21,18 +21,19 @@ const bodyMarkup = `
   <div class="status-right">
    <span class="conn-indicator" id="connIndicator">,··</span>
    <span class="battery-indicator"> 84%</span>
-   <div class="lang-switcher">
-    <button class="lang-btn" id="langBtnEn" onclick="setLanguage('en')">EN</button>
-    <button class="lang-btn" id="langBtnFr" onclick="setLanguage('fr')">FR</button>
-    <button class="lang-btn" id="langBtnRw" onclick="setLanguage('rw')">RW</button>
-   </div>
   </div>
  </div>
  <div class="kit-frame">
   <div class="kit-hinge"></div>
   <div class="kit-header">
-   <div class="label" id="kitHeaderLabel">SmartAid Kit, Prototype</div>
-   <h1 id="headerTitle">What's happening?</h1>
+   <div class="label" id="kitHeaderLabel">SmartAid Kit</div>
+   <div class="kit-header-title-row">
+    <svg class="kit-header-cross" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+     <rect x="1" y="1" width="22" height="22" rx="6" fill="#fff"/>
+     <path d="M11 5h2v5h5v2h-5v5h-2v-5H6v-2h5V5z" fill="#990011"/>
+    </svg>
+    <h1 id="headerTitle">What's happening?</h1>
+   </div>
   </div>
 
   <div class="screen" id="homeScreen">
@@ -150,6 +151,17 @@ const bodyMarkup = `
        For African English: look for en-NG (Nigerian), en-ZA (South African), en-KE (Kenyan), or en-GH (Ghanaian) in the list above.<br>
        If no African voices appear, install them via your device system settings.
       </div>
+      <div class="voice-fallback-note hidden" id="voiceFallbackNote"></div>
+     </div>
+
+     <!-- Pre-recorded audio settings (shown when recorded selected) -->
+     <div class="voice-api-section" id="voiceRecordedSection" style="display:none">
+      <div class="voice-api-label"> Pre-recorded audio</div>
+      <label class="voice-file-label" for="recordingUpload" id="recordingUploadLabel">Upload your own recordings</label>
+      <input class="voice-api-input" type="file" id="recordingUpload" accept="audio/*" multiple>
+      <div class="voice-info-note" id="recordingHint">
+       Record each guidance line on your phone's voice recorder app, save as separate files, then select them all here. Name them to match the order: bleeding, burn, headache, fainting, allergic, sprain, eyeinjury, nosebleed. Your recordings take priority over the system voice automatically.
+      </div>
      </div>
 
     </div>
@@ -169,6 +181,16 @@ const bodyMarkup = `
      <div id="stockRestockMsg" class="stock-restock-msg" style="display:none"></div>
      <button class="stock-restock-btn hidden" id="stockRestockBtn" onclick="showScreen('setupScreen');renderSetupScreen()"> Restock now → </button>
      <button class="stock-clear-btn" onclick="clearStockLog()" id="stockClearBtn" style="display:none"> Items restocked , mark as full</button>
+    </div>
+   </div>
+
+   <!-- Language , placed right under Kit stock so it's easy to reach -->
+   <div class="lang-bar">
+    <span class="lang-bar-label" id="langSwitcherLabel">Language</span>
+    <div class="lang-switcher">
+     <button class="lang-btn" id="langBtnEn" onclick="setLanguage('en')">EN</button>
+     <button class="lang-btn" id="langBtnFr" onclick="setLanguage('fr')">FR</button>
+     <button class="lang-btn" id="langBtnRw" onclick="setLanguage('rw')">RW</button>
     </div>
    </div>
  </div>
@@ -329,19 +351,6 @@ const bodyMarkup = `
   <ul id="logList"></ul>
  </div>
 
- <details class="voice-settings">
-  <summary id="voiceSettingsSummary">Voice settings</summary>
-  <div class="voice-row">
-   <label for="voiceSelect" id="voiceSelectLabel">System voice (uses whatever your device has installed)</label>
-   <select id="voiceSelect" onchange="setBrowserVoice(this.value)"></select>
-   <div class="voice-fallback-note hidden" id="voiceFallbackNote"></div>
-  </div>
-  <div class="voice-row">
-   <label for="recordingUpload" id="recordingUploadLabel">Or use your own recording instead (recommended)</label>
-   <input type="file" id="recordingUpload" accept="audio/*" multiple>
-   <p class="voice-hint" id="recordingHint">Record each guidance line on your phone's voice recorder app, save as separate files, then select them all here. Name them to match the order: bleeding, burn, headache, fainting, allergic, sprain, eyeinjury, nosebleed. Your recordings take priority over the system voice automatically.</p>
-  </div>
- </details>
 </div>
 
 <audio id="audioPlayer" class="hidden"></audio>

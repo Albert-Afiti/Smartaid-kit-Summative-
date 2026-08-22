@@ -43,7 +43,7 @@ const UI = {
   statusReady: "Ready", statusListening: "Listening...", statusGuidance: "Guidance: ",
   statusWaiting: "Waiting on Sickbay/Med Assistant", statusClinic: "Clinic/Ambulance notified",
   connConnected: " Connected, ", connJustNow: "checked just now", connAgo: "checked {s}s ago",
-  kitHeaderLabel: "SmartAid Kit, Prototype", headerHome: "What's happening?",
+  kitHeaderLabel: "SmartAid Kit", headerHome: "What's happening?",
   headerGuide: "Step 2: Guide", headerHelp: "Help: alerting Sickbay/Med Assistant", headerEmergency: "Emergency: clinic/ambulance notified",
   firstUseHint: " First time? Press <b>Assess</b> to begin.",
   lidLabel: "Smart Device System", micPartName: "Mic", speakerPartName: "Speaker",
@@ -77,10 +77,11 @@ const UI = {
   logAssessed: "Assessed: ", logFacultyAlert: "Sickbay/Med Assistant alert sent for: ",
   logEscalated: "Escalated to clinic/ambulance (no Sickbay/Med Assistant response): ", logManualClinic: "Clinic/Ambulance alerted directly (manual emergency): ",
   voiceSettingsSummary: "Voice settings",
+  langSwitcherLabel: "Language",
   voiceSelectLabel: "System voice (uses whatever your device has installed)",
   voiceNoVoices: "No voices found yet , try reopening voice settings",
   voiceFallbackNote: " No Kinyarwanda voice found on this device. Guidance text will still show in Kinyarwanda, but spoken audio will use the closest available voice instead, or your own uploaded recording.",
-  recordingUploadLabel: "Or use your own recording instead (recommended)",
+  recordingUploadLabel: "Upload your own recordings",
   recordingHint: "Record each guidance line on your phone's voice recorder app, save as separate files, then select them all here. Name them to match the order: bleeding, burn, headache, fainting, allergic, sprain, eyeinjury, nosebleed. Your recordings take priority over the system voice automatically.",
   recordingLoaded: "Loaded {n} recording(s). They'll play in this order: {list}."
  },
@@ -88,7 +89,7 @@ const UI = {
   statusReady: "Prêt", statusListening: "Écoute...", statusGuidance: "Conseil: ",
   statusWaiting: "En attente du personnel", statusClinic: "Clinique alertée",
   connConnected: " Connecté, ", connJustNow: "vérifié à l'instant", connAgo: "vérifié il y a {s}s",
-  kitHeaderLabel: "SmartAid Kit, Prototype", headerHome: "Que se passe-t-il ?",
+  kitHeaderLabel: "SmartAid Kit", headerHome: "Que se passe-t-il ?",
   headerGuide: "Étape 2: Conseils", headerHelp: "Aide: alerte au personnel", headerEmergency: "Urgence: clinique alertée",
   firstUseHint: " Première fois ? Appuyez sur <b>Évaluer</b> pour commencer.",
   lidLabel: "Appareil , couvercle de la trousse", micPartName: "Micro", speakerPartName: "Haut-parleur",
@@ -122,10 +123,11 @@ const UI = {
   logAssessed: "Évalué: ", logFacultyAlert: "Alerte au personnel envoyée pour: ",
   logEscalated: "Transféré à la clinique (pas de réponse du personnel): ", logManualClinic: "Clinique alertée directement (urgence manuelle): ",
   voiceSettingsSummary: "Paramètres vocaux",
+  langSwitcherLabel: "Langue",
   voiceSelectLabel: "Voix du système (utilise les voix installées sur votre appareil)",
   voiceNoVoices: "Aucune voix trouvée , essayez de rouvrir les paramètres vocaux",
   voiceFallbackNote: " Aucune voix en kinyarwanda trouvée sur cet appareil. Le texte s'affichera tout de même en kinyarwanda, mais l'audio utilisera la voix la plus proche disponible, ou votre propre enregistrement.",
-  recordingUploadLabel: "Ou utilisez plutôt votre propre enregistrement (recommandé)",
+  recordingUploadLabel: "Téléversez vos propres enregistrements",
   recordingHint: "Enregistrez chaque ligne de conseils avec l'enregistreur vocal de votre téléphone, sauvegardez-les séparément, puis sélectionnez-les toutes ici. Nommez-les dans cet ordre: bleeding, burn, headache, fainting, allergic, sprain, eyeinjury, nosebleed. Vos enregistrements remplacent automatiquement la voix du système.",
   recordingLoaded: "{n} enregistrement(s) chargé(s). Ils joueront dans cet ordre: {list}."
  },
@@ -133,7 +135,7 @@ const UI = {
   statusReady: "Biteguye", statusListening: "Kumva...", statusGuidance: "Inama: ",
   statusWaiting: "Gutegereza abarimu", statusClinic: "Ivuriro ryamenyeshejwe",
   connConnected: " Bihujwe, ", connJustNow: "byagenzuwe ubu", connAgo: "byagenzuwe {s}s ishize",
-  kitHeaderLabel: "SmartAid Kit, Igerageza", headerHome: "Ikibazo nikihe?",
+  kitHeaderLabel: "SmartAid Kit", headerHome: "Ikibazo nikihe?",
   headerGuide: "Intambwe 2: Inama", headerHelp: "Ubufasha: kumenyesha abarimu", headerEmergency: "Ibyihutirwa: ivuriro ryamenyeshejwe",
   firstUseHint: " Ubwa mbere? Kanda kuri <b>Suzuma</b> kugira ngo utangire.",
   lidLabel: "Igikoresho , igitebo cy'agasanduku", micPartName: "Mikoro", speakerPartName: "Ijwi",
@@ -167,10 +169,11 @@ const UI = {
   logAssessed: "Byasuzumwe: ", logFacultyAlert: "Itangazo ry'abarimu ryoherejwe kuri: ",
   logEscalated: "Byoherejwe ku ivuriro (nta gisubizo cy'abarimu): ", logManualClinic: "Ivuriro ryamenyeshejwe ako kanya (ibyihutirwa by'umukoresha): ",
   voiceSettingsSummary: "Igenamiterere ry'ijwi",
+  langSwitcherLabel: "Ururimi",
   voiceSelectLabel: "Ijwi rya sisitemu (rikoresha amajwi ari kuri iki gikoresho)",
   voiceNoVoices: "Nta jwi ryabonetse , gerageza gufungura igenamiterere ry'ijwi nanone",
   voiceFallbackNote: " Nta jwi ry'Ikinyarwanda ryabonetse kuri iki gikoresho. Inyandiko izakomeza kugaragara mu Kinyarwanda, ariko ijwi rizakoresha irindi jwi riboneka cyangwa irikoze wowe ubwawe.",
-  recordingUploadLabel: "Cyangwa ukoreshe ijwi ryawe (birasabwa)",
+  recordingUploadLabel: "Shyiramo amajwi wanditse ubwawe",
   recordingHint: "Andika umurongo wa buri nama ukoresheje porogaramu y'andika amajwi kuri telefoni yawe, ubike ku buryo butandukanye, hanyuma uhitemo byose hano. Bishyire mu rutonde rumwe: bleeding, burn, headache, fainting, allergic, sprain, eyeinjury, nosebleed. Amajwi wanditse azakoreshwa mbere y'ay'isisitemu.",
   recordingLoaded: "Amajwi {n} yashyizwemo. Azumvikana muri ubu buryo: {list}."
  }
@@ -189,7 +192,7 @@ function tr(key, vars) {
 const SITUATIONS_I18N = {
  en: {
   bleeding: { label: "Bleeding / cut", itemHint: "Gloves #9, Gauze #3, Bandage #1, Antiseptic #5, Scissors #10",
-   keywords: ["bleeding","bleed","blood","cut","wound","scrape","gash","laceration","slash","slice","puncture","stab","injury","injured","hurt","deep cut","finger cut","hand cut","arm cut","leg cut","head cut","scalp cut","gushing","blood wont stop","blood not stopping","construction accident","tool cut","knife","glass cut","sharp object","open wound","flesh wound","losing blood","nail cut","razor","machine cut","factory injury","wire cut","fell on glass","broken skin","torn skin","bite wound","animal bite","dog bite","mosquito cut","workplace injury"],
+   keywords: ["bleeding","bleed","blood","cut","wound","scrape","gash","laceration","slash","slice","puncture","stab","injury","injured","hurt","deep cut","finger cut","hand cut","arm cut","leg cut","head cut","scalp cut","gushing","blood wont stop","blood not stopping","construction accident","tool cut","knife","glass cut","sharp object","open wound","flesh wound","losing blood","nail cut","razor","machine cut","factory injury","wire cut","fell on glass","broken skin","torn skin","mosquito cut","workplace injury"],
    urgencyNote: "Start within the next minute or two , bleeding is easier to control early.",
    intro: "For a cut or scrape that's bleeding:",
    steps: ["Use the sterile gauze (item #3) , press firmly on the wound.","Hold pressure for 5 minutes without checking.","Once it slows, clean with antiseptic wipe (item #5).","Cover with a bandage (item #1) sized to the wound."],
@@ -237,11 +240,23 @@ const SITUATIONS_I18N = {
    urgencyNote: "Stay calm , most nosebleeds stop within 10 minutes with correct technique.",
    intro: "For a nosebleed:",
    steps: ["Sit upright , do NOT tilt the head backward.","Pinch the soft part of the nose firmly for 10 minutes without releasing.","Breathe through the mouth while pinching.","Apply cold pack (item #6) wrapped in cloth to the bridge of the nose.","If bleeding does not stop after 20 minutes, press Help now."],
-   speak: "For a nosebleed, sit upright and do not tilt the head back. Pinch the soft part of the nose firmly for 10 minutes without releasing. Apply the cold pack, item 6, to the bridge of the nose. If it does not stop after 20 minutes, press Help now." }
+   speak: "For a nosebleed, sit upright and do not tilt the head back. Pinch the soft part of the nose firmly for 10 minutes without releasing. Apply the cold pack, item 6, to the bridge of the nose. If it does not stop after 20 minutes, press Help now." },
+  animalbite: { label: "Animal / dog bite", itemHint: "Gloves #9, Antiseptic #5, Gauze #3, Bandage #1",
+   keywords: ["bite","bitten","dog bite","animal bite","bite wound","cat bite","dog attack","bitten by dog","bitten by animal","puppy bite","stray dog","dog scratch","animal scratch","rabies","punctured by teeth","teeth marks","monkey bite","rat bite","bat bite"],
+   urgencyNote: "Start within the next few minutes , clean the wound early to reduce infection risk.",
+   intro: "For an animal or dog bite:",
+   steps: ["Wash the bite thoroughly with soap and water for 5 minutes or more.","Apply an antiseptic wipe (item #5).","Cover with a sterile bandage (item #1).","Note the animal and time of the bite for medical follow-up."],
+   speak: "For an animal or dog bite, wash the wound thoroughly with soap and water for at least 5 minutes. Apply the antiseptic wipe, item 5, and cover with a bandage, item 1. Note the animal and time of the bite for medical follow-up." },
+  choking: { label: "Choking", itemHint: "No item needed , back blows and abdominal thrusts",
+   keywords: ["choking","choke","choked","cant breathe","can't breathe","stuck in throat","something stuck","food stuck","gagging","cant swallow","cant cough","turning blue","blocked airway","swallowed wrong","went down wrong","cant speak","clutching throat","heimlich"],
+   urgencyNote: "Act right now , a blocked airway can turn life-threatening within minutes.",
+   intro: "If someone is choking:",
+   steps: ["If they can cough or speak, encourage them to keep coughing , do not hit their back yet.","If their cough is weak or they can't clear it, give 5 firm back blows between the shoulder blades.","If that doesn't work, give 5 abdominal thrusts , fist above the navel, sharp inward and upward pulls.","If they can't breathe at all or turn blue, press Alert now."],
+   speak: "If someone is choking and can still cough or speak, encourage them to keep coughing. If the cough is weak, give 5 firm back blows between the shoulder blades. If that does not work, give 5 abdominal thrusts. If they cannot breathe at all, press alert now." }
  },
  fr: {
   bleeding: { label: "Saignement / coupure", itemHint: "Gants #9, Gaze #3, Pansement #1, Antiseptique #5, Ciseaux #10",
-   keywords: ["saigne","saignement","sang","coupure","blessure","plaie","éraflure","lacération","entaille","plaie ouverte","coupure profonde","blessure grave","accident de travail","coupure au doigt","coupure à la main","coupure à la tête","cuir chevelu","sang qui coule","sang qui ne s arrête pas","morsure","accident chantier","machine","outil coupant","verre","objet tranchant"],
+   keywords: ["saigne","saignement","sang","coupure","blessure","plaie","éraflure","lacération","entaille","plaie ouverte","coupure profonde","blessure grave","accident de travail","coupure au doigt","coupure à la main","coupure à la tête","cuir chevelu","sang qui coule","sang qui ne s arrête pas","accident chantier","machine","outil coupant","verre","objet tranchant"],
    urgencyNote: "Commencez dans la minute ou deux , un saignement est plus facile à contrôler tôt.",
    intro: "Pour une coupure ou éraflure qui saigne :",
    steps: ["Utilisez la gaze stérile (article n°3) , appuyez fermement sur la plaie.","Maintenez la pression pendant 5 minutes sans vérifier.","Une fois que ça ralentit, nettoyez avec une lingette antiseptique (article n°5).","Couvrez avec un pansement (article n°1) adapté à la taille de la plaie."],
@@ -287,7 +302,19 @@ const SITUATIONS_I18N = {
    urgencyNote: "Restez calme , la plupart des saignements de nez s'arrêtent en 10 minutes avec la bonne technique.",
    intro: "Pour un saignement de nez :",
    steps: ["Asseyez-vous droit , ne penchez PAS la tête en arrière.","Pincez fermement la partie molle du nez pendant 10 minutes sans relâcher.","Respirez par la bouche en pinçant.","Appliquez un pack froid (article n°6) enveloppé dans un tissu sur l'arête du nez.","Si le saignement ne s'arrête pas après 20 minutes, appuyez sur Aide maintenant."],
-   speak: "Pour un saignement de nez, asseyez-vous droit et ne penchez pas la tête en arrière. Pincez fermement la partie molle du nez pendant 10 minutes. Appliquez le pack froid, article 6, sur l'arête du nez. Si cela ne s'arrête pas après 20 minutes, appuyez sur Aide maintenant." }
+   speak: "Pour un saignement de nez, asseyez-vous droit et ne penchez pas la tête en arrière. Pincez fermement la partie molle du nez pendant 10 minutes. Appliquez le pack froid, article 6, sur l'arête du nez. Si cela ne s'arrête pas après 20 minutes, appuyez sur Aide maintenant." },
+  animalbite: { label: "Morsure d'animal / de chien", itemHint: "Gants #9, Antiseptique #5, Gaze #3, Pansement #1",
+   keywords: ["morsure","mordu","morsure de chien","morsure d'animal","morsure de chat","attaque de chien","griffure","chien errant","rage","marques de dents"],
+   urgencyNote: "Commencez dans les prochaines minutes , nettoyer la plaie tôt réduit le risque d'infection.",
+   intro: "Pour une morsure d'animal ou de chien :",
+   steps: ["Lavez la morsure abondamment à l'eau et au savon pendant 5 minutes ou plus.","Appliquez une lingette antiseptique (article n°5).","Couvrez avec un pansement stérile (article n°1).","Notez l'animal et l'heure de la morsure pour le suivi médical."],
+   speak: "Pour une morsure d'animal ou de chien, lavez la plaie abondamment à l'eau et au savon pendant au moins 5 minutes. Appliquez la lingette antiseptique, article 5, et couvrez avec un pansement, article 1. Notez l'animal et l'heure de la morsure." },
+  choking: { label: "Étouffement", itemHint: "Aucun article , tapes dans le dos et compressions abdominales",
+   keywords: ["étouffement","étouffe","s'étouffe","ne peut pas respirer","coincé dans la gorge","avale de travers","bloqué","devient bleu","heimlich"],
+   urgencyNote: "Agissez immédiatement , une voie respiratoire bloquée peut devenir mortelle en quelques minutes.",
+   intro: "Si quelqu'un s'étouffe :",
+   steps: ["S'il peut tousser ou parler, encouragez-le à continuer à tousser , ne frappez pas encore son dos.","Si sa toux est faible, donnez 5 tapes fermes entre les omoplates.","Si cela ne fonctionne pas, donnez 5 compressions abdominales , poing au-dessus du nombril, tractions vers l'intérieur et le haut.","S'il ne peut plus respirer du tout ou devient bleu, appuyez sur Alerte maintenant."],
+   speak: "Si quelqu'un s'étouffe et peut encore tousser ou parler, encouragez-le à continuer à tousser. Si la toux est faible, donnez 5 tapes fermes entre les omoplates. Si cela ne fonctionne pas, donnez 5 compressions abdominales. S'il ne peut pas respirer du tout, appuyez sur alerte maintenant." }
  },
  rw: {
   bleeding: { label: "Amaraso / igikomere", itemHint: "Inzuzo #9, Gaze #3, Bandage #1, Umuti wica mikorobe #5, Ingorogoro #10",
@@ -337,7 +364,19 @@ const SITUATIONS_I18N = {
    urgencyNote: "Komera umutima , amaraso menshi ahagarara mu minota 10 ukoresheje uburyo bwiza.",
    intro: "Ku maraso avuye mu mazuru:",
    steps: ["Icara neza , ntugunde umutwe inyuma.","Kanda igice cyoroheje cy'amazuru neza mu minota 10 utarekura.","Humeka ukoresheje akanwa mu gihe ukanda.","Shyiraho ikintu gikonje (igikoresho #6) gipfundikiye mu kitenge ku mazuru.","Niba amaraso atahagaraye nyuma y'iminota 20, kanda Ubufasha ubu."],
-   speak: "Ku maraso avuye mu mazuru, icara neza kandi ntugunde umutwe inyuma. Kanda igice cyoroheje cy'amazuru neza mu minota 10 utarekura. Shyiraho ikintu gikonje, igikoresho 6, ku mazuru. Niba atahagaraye nyuma y'iminota 20, kanda Ubufasha ubu." }
+   speak: "Ku maraso avuye mu mazuru, icara neza kandi ntugunde umutwe inyuma. Kanda igice cyoroheje cy'amazuru neza mu minota 10 utarekura. Shyiraho ikintu gikonje, igikoresho 6, ku mazuru. Niba atahagaraye nyuma y'iminota 20, kanda Ubufasha ubu." },
+  animalbite: { label: "Kurumwa n'inyamaswa/imbwa", itemHint: "Inzuzo #9, Umuti wica mikorobe #5, Gaze #3, Bandage #1",
+   keywords: ["kurumwa","yarumwe","kurumwa n imbwa","kurumwa n inyamaswa","kurumwa n injangwe","imbwa yamurumye","amenyo","rabies","imbwa idafite nyir'ubwite"],
+   urgencyNote: "Tangira mu minota mike , gusukura igikomere hakiri kare bigabanya ibyago by'indwara.",
+   intro: "Ku kurumwa n'inyamaswa cyangwa imbwa:",
+   steps: ["Karaba igikomere neza n'amazi n'isabune mu minota 5 cyangwa irenga.","Shyiraho umuti wica mikorobe (igikoresho #5).","Pfundikiza na bandage isukuye (igikoresho #1).","Andika inyamaswa n'igihe cyo kurumwa kugira ngo bifashe muganga."],
+   speak: "Ku kurumwa n'inyamaswa cyangwa imbwa, karaba igikomere neza n'amazi n'isabune byibuze mu minota 5. Shyiraho umuti wica mikorobe, igikoresho 5, hanyuma upfundikize na bandage, igikoresho 1. Andika inyamaswa n'igihe cyo kurumwa." },
+  choking: { label: "Guhumeka nabi/kuniga", itemHint: "Nta gikoresho , gukubita umugongo no gukanda inda",
+   keywords: ["kuniga","yanigika","ntiyumva guhumeka","ikintu cyafunze umuhogo","ntashobora guhumeka","ahinda umushyitsi","aba umuvunde"],
+   urgencyNote: "Kora ako kanya , umuhogo wafunze urashobora kuba akaga mu minota mike.",
+   intro: "Niba umuntu aniga:",
+   steps: ["Niba ashobora gukorora cyangwa kuvuga, mushishikarize gukomeza gukorora , ntukamukubite umugongo.","Niba gukorora kwe kudakomeye, mukubite inshuro 5 zikomeye hagati y'ibitugu.","Niba ibyo bitagenze neza, kanda inda inshuro 5 , ikofe hejuru y'umukondo, ukurura imbere hejuru.","Niba adashobora guhumeka na gato cyangwa ahindutse ubururu, kanda Itangazo ubu."],
+   speak: "Niba umuntu aniga kandi ashobora gukorora cyangwa kuvuga, mushishikarize gukomeza gukorora. Niba gukorora kudakomeye, mukubite inshuro 5 hagati y'ibitugu. Niba ibyo bitagenze neza, kanda inda inshuro 5. Niba adashobora guhumeka na gato, kanda itangazo ubu." }
  }
 };
 
@@ -472,6 +511,36 @@ const TRIAGE = {
      speak: "Severe nosebleed. Keep the person upright. Do not tilt the head back. Emergency services are being contacted now.",
      waitingSteps: ["Keep the person sitting upright at all times , blood flowing down the throat can cause choking or vomiting.", "Continue pinching the nose if the person is conscious and cooperative.", "If blood is flowing down the throat and they feel like gagging, let them spit it out , do not swallow it.", "Do NOT pack the nostrils with tissue or cotton , this can cause more damage when removed.", "If person becomes faint or loses consciousness, place them gently on their side.", "Keep them calm , anxiety increases blood pressure which worsens the bleeding.", "Note the time the bleeding started and tell medical staff."],
      waitingSpeak: "Emergency has been contacted. Keep the person upright. Continue pinching if possible. If blood runs down the throat, let them spit it out. Do not pack the nostrils. If they faint, place on their side." }
+   },
+   animalbite: {
+    question: "How serious is the bite?",
+    l1: { label: "Minor", desc: "Small break in skin, minimal bleeding, no deep puncture", autoAction: null,
+     steps: ["Wash the bite thoroughly with soap and water for 5 minutes or more.","Apply an antiseptic wipe (item #5).","Cover with a sterile bandage (item #1).","Note the animal and time of the bite for medical follow-up."],
+     speak: "For a minor bite, wash thoroughly with soap and water for 5 minutes or more, apply antiseptic wipe, and cover with a sterile bandage. Note the animal and time for medical follow-up." },
+    l2: { label: "Moderate", desc: "Deeper puncture wounds, bleeding, or bite from an unfamiliar or stray animal", autoAction: "faculty",
+     steps: ["Put on gloves (item #9).","Wash the wound thoroughly , do not scrub deep punctures.","Apply antiseptic (item #5), cover with sterile gauze (item #3).","Sickbay/Med Assistant has been alerted , watch for swelling, redness, or fever over the next 24 hours , these need medical attention."],
+     speak: "For a moderate bite, put on gloves, wash the wound thoroughly without scrubbing deep punctures, apply antiseptic, and cover with sterile gauze. Sickbay/Med Assistant has been alerted. Watch for swelling, redness, or fever.",
+     waitingSteps: ["Keep the wound clean and covered with the sterile gauze , do not remove it to keep checking.", "Watch closely for swelling, redness, warmth, or pus around the bite.", "Watch for fever, chills, or the person feeling generally unwell.", "Keep the bitten area elevated if possible to reduce swelling.", "Note exactly when the bite happened and what animal caused it , this matters for rabies risk assessment.", "Reassure the person calmly , tell them help is on the way."] },
+    l3: { label: "Severe", desc: "Heavy bleeding, deep or large wound, bite to the face, neck, or hands, or from a wild or unknown animal", autoAction: "emergency",
+     steps: ["Put on gloves (item #9) immediately.","Control any heavy bleeding with firm gauze (item #3) pressure.","Do not attempt to close a deep wound yourself.","Emergency services are being contacted now , animal bites need rabies risk assessment at a clinic regardless of severity."],
+     speak: "Severe animal bite. Put on gloves immediately. Control heavy bleeding with firm gauze pressure. Do not attempt to close the wound yourself. Emergency services are being contacted now , this needs rabies risk assessment at a clinic.",
+     waitingSteps: ["Keep firm, continuous pressure on the wound with gauze , do not remove it to check.", "Do NOT attempt to close or stitch the wound yourself.", "Keep the person still and calm , movement can restart bleeding.", "Note exactly when the bite happened and what animal caused it , the clinic will need this for rabies risk assessment.", "Do not apply any home remedy , clean cloth or gauze only.", "Reassure them and keep them warm , help is already on the way."],
+     waitingSpeak: "Emergency has been contacted. While waiting: keep firm pressure on the wound with gauze. Do not try to close it yourself. Keep the person still and calm. Note the animal and time of the bite for the clinic." }
+   },
+   choking: {
+    question: "How severe is the choking?",
+    l1: { label: "Minor , can cough or speak", desc: "Coughing, can still speak or breathe", autoAction: null,
+     steps: ["Encourage them to keep coughing , this is the body clearing it naturally.","Do not hit their back while they're still coughing effectively.","Stay calm and stay with them.","If coughing stops clearing it or they can no longer speak, move to firm back blows immediately."],
+     speak: "If they can still cough or speak, encourage them to keep coughing, this is the body clearing it naturally. Do not hit their back while they are coughing effectively. Stay calm and stay with them." },
+    l2: { label: "Moderate , weak cough", desc: "Weak cough, can't fully clear the airway", autoAction: "faculty",
+     steps: ["Stand behind them, lean them slightly forward.","Give 5 firm back blows between the shoulder blades with the heel of your hand.","If that doesn't work, give 5 abdominal thrusts , fist above the navel, sharp inward-and-upward pulls.","Sickbay/Med Assistant has been alerted , alternate 5 back blows and 5 abdominal thrusts until it clears."],
+     speak: "For a weak cough that cannot clear the airway, stand behind them, lean them forward, and give 5 firm back blows between the shoulder blades. If that does not work, give 5 abdominal thrusts. Sickbay/Med Assistant has been alerted. Alternate until it clears.",
+     waitingSteps: ["Keep alternating 5 back blows and 5 abdominal thrusts , do not stop until the object clears or they can breathe normally.", "Check their mouth for a visible object between rounds , only remove it if you can clearly see and reach it.", "Stay calm and keep talking to them , panic makes the airway tighten further.", "If they become unable to cough, speak, or breathe at all, press Emergency immediately.", "If they lose consciousness, lower them to the ground carefully and begin CPR if trained.", "Keep monitoring , help is already on the way."] },
+    l3: { label: "Severe , can't breathe or unconscious", desc: "Can't breathe, can't cough, turning blue, or unconscious", autoAction: "emergency",
+     steps: ["Press EMERGENCY immediately.","If they become unconscious, lower them to the ground carefully and begin CPR chest compressions if trained.","Check the mouth for a visible object before each rescue breath, but never blindly finger-sweep.","Continue CPR until help arrives or they start breathing."],
+     speak: "Severe choking. Press emergency immediately. If they become unconscious, lower them to the ground carefully and begin CPR if trained. Check the mouth for a visible object before each rescue breath, but never blindly finger sweep.",
+     waitingSteps: ["If they are unconscious, continue CPR , 30 chest compressions, 2 rescue breaths, repeat.", "Check the mouth briefly before each rescue breath , only remove an object you can clearly see, never blindly finger-sweep.", "If they start coughing, breathing, or moving, stop CPR and place them in the recovery position on their side.", "Do NOT give anything by mouth , not water, not food.", "Do NOT leave them alone , someone must stay with them at all times.", "Note exactly when the choking started , tell this to medical staff when they arrive."],
+     waitingSpeak: "Emergency has been contacted. While waiting: if unconscious, continue CPR. Check the mouth briefly before each rescue breath, never blindly finger sweep. If they start breathing, place them on their side. Do not leave them alone." }
    }
   }
  }
@@ -504,6 +573,8 @@ TRIAGE.fr.situations.allergic.question = "Quelle est la gravité de la réaction
 TRIAGE.fr.situations.sprain.question = "Quelle est la gravité de la blessure ?";
 TRIAGE.fr.situations.eyeinjury.question = "Quel type de blessure à l'œil ?";
 TRIAGE.fr.situations.nosebleed.question = "Quelle est la gravité du saignement de nez ?";
+TRIAGE.fr.situations.animalbite.question = "Quelle est la gravité de la morsure ?";
+TRIAGE.fr.situations.choking.question = "Quelle est la gravité de l'étouffement ?";
 
 // Override question text in Kinyarwanda
 TRIAGE.rw.situations.bleeding.question = "Amaraso avuye bingana iki ?";
@@ -514,6 +585,8 @@ TRIAGE.rw.situations.allergic.question = "Indwara y'aleriji ikaze bingana iki ?"
 TRIAGE.rw.situations.sprain.question = "Ibikomere bikaze bingana iki ?";
 TRIAGE.rw.situations.eyeinjury.question = "Ni ingorane iyihe y'ijisho ?";
 TRIAGE.rw.situations.nosebleed.question = "Amaraso y'amazuru akaze bingana iki ?";
+TRIAGE.rw.situations.animalbite.question = "Kurumwa bikaze bingana iki ?";
+TRIAGE.rw.situations.choking.question = "Kuniga bikaze bingana iki ?";
 
 // ── ANIMATION DATA ─────────────────────────────────────────────────────
 // Each situation has an array of SVG frames , one per guidance step.
@@ -1669,6 +1742,82 @@ const STEP_ANIMATIONS = {
    { label: 'Note time bleeding started', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#FFEAA0" font-size="28" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Note time bleeding started</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Tell medical staff</text>` },
   ],
  },
+ animalbite: {
+  l1: [
+   { label: 'Wash bite 5+ minutes', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">STEP 1 , WASH THOROUGHLY</text><ellipse cx="100" cy="80" rx="30" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Soap and water , 5+ minutes</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Reduces infection risk</text>` },
+   { label: 'Apply antiseptic wipe', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">STEP 2 , CLEAN WOUND</text><rect x="72" y="65" width="56" height="34" rx="4" fill="#F5F5F0" opacity="0.9"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Antiseptic wipe , item 5</text>` },
+   { label: 'Cover with sterile bandage', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="100" cy="82" rx="35" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="78" y="68" width="44" height="28" rx="5" fill="#F5F5F0" opacity="0.9" stroke="#5DCAA5" stroke-width="1.5"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Cover with bandage , item 1</text>` },
+   { label: 'Note animal and time', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#FFEAA0" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Note animal and time</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Needed for medical follow-up</text>` },
+  ],
+  l2: [
+   { label: 'Gloves on', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">GLOVES FIRST</text><ellipse cx="100" cy="85" rx="24" ry="32" fill="none" stroke="#5DCAA5" stroke-width="2.5" stroke-dasharray="4,3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Item 9 , gloves , protect yourself</text>` },
+   { label: 'Wash gently , do not scrub', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">WASH GENTLY</text><ellipse cx="100" cy="80" rx="30" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Do not scrub deep punctures</text>` },
+   { label: 'Antiseptic and sterile gauze', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">COVER WOUND</text><rect x="72" y="65" width="56" height="34" rx="4" fill="#F5F5F0" opacity="0.9"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Antiseptic #5, gauze #3</text>` },
+   { label: 'Watch for swelling or fever', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">WATCH 24 HOURS</text><text x="55" y="72" text-anchor="middle" fill="#888780" font-size="10">Swelling</text><text x="145" y="72" text-anchor="middle" fill="#888780" font-size="10">Redness</text><text x="100" y="90" text-anchor="middle" fill="#888780" font-size="10">Fever</text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Sickbay/Med Assistant alerted</text>` },
+  ],
+  l3: [
+   { label: 'Gloves on immediately', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">GLOVES IMMEDIATELY</text><ellipse cx="100" cy="85" rx="24" ry="32" fill="none" stroke="#5DCAA5" stroke-width="2.5" stroke-dasharray="4,3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Item 9 , protect yourself first</text>` },
+   { label: 'Control bleeding , firm pressure', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">FIRM PRESSURE</text><ellipse cx="100" cy="82" rx="35" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="100" cy="82" rx="9" ry="5" fill="#990011" opacity="0.7"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Firm gauze pressure , item 3</text>` },
+   { label: 'Do not close the wound', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">DO NOT CLOSE</text><line x1="76" y1="54" x2="124" y2="102" stroke="#990011" stroke-width="3"/><line x1="124" y1="54" x2="76" y2="102" stroke="#990011" stroke-width="3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Leave the wound for medical staff</text>` },
+   { label: 'Emergency , rabies assessment', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="72" text-anchor="middle" fill="#990011" font-size="28" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Emergency contacted</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Rabies risk assessment needed</text>` },
+  ],
+  waiting: {
+   l2: [
+    { label: 'Keep wound covered', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">KEEP COVERED</text><rect x="72" y="65" width="56" height="34" rx="4" fill="#F5F5F0" opacity="0.9"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Do not remove gauze to check</text>` },
+    { label: 'Watch swelling or pus', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">WATCH CLOSELY</text><text x="55" y="72" text-anchor="middle" fill="#888780" font-size="10">Swelling</text><text x="145" y="72" text-anchor="middle" fill="#888780" font-size="10">Redness</text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Watch warmth or pus around bite</text>` },
+    { label: 'Watch for fever', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">WATCH FOR FEVER</text><text x="100" y="72" text-anchor="middle" fill="#888780" font-size="26"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Fever, chills, feeling unwell</text>` },
+    { label: 'Elevate the bitten area', svg: `<rect width="200" height="150" fill="#1C1C1A"/><line x1="140" y1="88" x2="186" y2="55" stroke="#E0D4C0" stroke-width="8" stroke-linecap="round"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Elevate to reduce swelling</text>` },
+    { label: 'Note animal and time', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#FFEAA0" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Note animal and time</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Needed for rabies risk assessment</text>` },
+    { label: 'Reassure calmly', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="55" cy="60" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="41" y="76" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Help is on the way</text>` },
+   ],
+   l3: [
+    { label: 'Firm pressure with gauze', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">CONTINUOUS PRESSURE</text><ellipse cx="100" cy="82" rx="35" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="100" cy="82" rx="9" ry="5" fill="#990011" opacity="0.7"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Do not release for any reason</text>` },
+    { label: 'Do not close the wound', svg: `<rect width="200" height="150" fill="#1C1C1A"/><line x1="76" y1="54" x2="124" y2="102" stroke="#990011" stroke-width="3"/><line x1="124" y1="54" x2="76" y2="102" stroke="#990011" stroke-width="3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Leave it for medical staff</text>` },
+    { label: 'Keep still and calm', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="100" cy="62" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="86" y="78" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Movement can restart bleeding</text>` },
+    { label: 'Note animal and time', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#FFEAA0" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Note animal and time</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Clinic needs this for rabies risk</text>` },
+    { label: 'No home remedy', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="72" text-anchor="middle" fill="#888780" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Clean cloth or gauze only</text>` },
+    { label: 'Reassure and keep warm', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#5DCAA5" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Help is already on the way</text>` },
+   ],
+  },
+ },
+ choking: {
+  l1: [
+   { label: 'Encourage coughing', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">STEP 1 , LET THEM COUGH</text><ellipse cx="100" cy="62" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="86" y="78" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Body is clearing it naturally</text>` },
+   { label: 'Do not hit back yet', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">NOT YET</text><line x1="76" y1="54" x2="124" y2="102" stroke="#990011" stroke-width="3"/><line x1="124" y1="54" x2="76" y2="102" stroke="#990011" stroke-width="3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Only while cough is effective</text>` },
+   { label: 'Stay calm , stay with them', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="55" cy="60" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="41" y="76" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="118" cy="65" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="104" y="81" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Do not leave them alone</text>` },
+   { label: 'If it worsens , act now', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">IF COUGH WEAKENS</text><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">Move to back blows immediately</text>` },
+  ],
+  l2: [
+   { label: 'Lean them forward', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">STAND BEHIND, LEAN FORWARD</text><ellipse cx="100" cy="62" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="86" y="78" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2" transform="rotate(12 100 94)"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Support their chest as you lean them</text>` },
+   { label: '5 back blows', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">5 FIRM BACK BLOWS</text><ellipse cx="100" cy="62" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="86" y="78" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Heel of your hand , shoulder blades</text>` },
+   { label: '5 abdominal thrusts', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">5 ABDOMINAL THRUSTS</text><ellipse cx="100" cy="70" rx="18" ry="20" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="84" y="88" width="32" height="30" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><circle cx="100" cy="103" r="4" fill="#5DCAA5"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Fist above navel , inward and up</text>` },
+   { label: 'Alternate until clears', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#E65100" font-size="10" font-weight="bold" font-family="Arial">ALTERNATE 5 / 5</text><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">Back blows , abdominal thrusts</text><text x="100" y="140" text-anchor="middle" fill="#888780" font-size="9" font-family="Arial">Sickbay/Med Assistant alerted</text>` },
+  ],
+  l3: [
+   { label: 'Press Emergency', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="72" text-anchor="middle" fill="#990011" font-size="28" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Press Emergency immediately</text>` },
+   { label: 'If unconscious , begin CPR', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">LOWER CAREFULLY , CPR</text><rect x="59" y="80" width="120" height="14" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="43" cy="87" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Chest compressions if trained</text>` },
+   { label: 'Check mouth before breaths', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#990011" font-size="10" font-weight="bold" font-family="Arial">CHECK , DO NOT SWEEP</text><ellipse cx="100" cy="70" rx="22" ry="26" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Only remove what you can see</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Never blindly finger-sweep</text>` },
+   { label: 'Continue CPR', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">30 compressions , 2 breaths</text><text x="100" y="140" text-anchor="middle" fill="#888780" font-size="9" font-family="Arial">Repeat until help arrives</text>` },
+  ],
+  waiting: {
+   l2: [
+    { label: 'Keep alternating 5 / 5', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">KEEP ALTERNATING</text><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">Back blows , abdominal thrusts</text><text x="100" y="140" text-anchor="middle" fill="#888780" font-size="9" font-family="Arial">Until it clears or breathing returns</text>` },
+    { label: 'Check mouth between rounds', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">CHECK MOUTH</text><ellipse cx="100" cy="70" rx="22" ry="26" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Only remove if clearly visible</text>` },
+    { label: 'Stay calm , keep talking', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="55" cy="60" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="41" y="76" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="48" text-anchor="middle" fill="#FFEAA0" font-size="9" font-family="Arial">Stay calm...</text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Panic tightens the airway further</text>` },
+    { label: 'If it worsens , Emergency', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">IF THEY CANNOT COUGH</text><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">Press Emergency immediately</text>` },
+    { label: 'If unconscious , begin CPR', svg: `<rect width="200" height="150" fill="#1C1C1A"/><rect x="59" y="80" width="120" height="14" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="43" cy="87" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Lower carefully , CPR if trained</text>` },
+    { label: 'Keep monitoring', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="100" cy="82" rx="30" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><circle cx="100" cy="80" r="36" fill="none" stroke="#5DCAA5" stroke-width="2" stroke-dasharray="4,3"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Help is already on the way</text>` },
+   ],
+   l3: [
+    { label: 'Continue CPR', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="15" text-anchor="middle" fill="#7A5200" font-size="10" font-weight="bold" font-family="Arial">CONTINUE CPR</text><text x="100" y="80" text-anchor="middle" fill="#5DCAA5" font-size="12" font-family="Arial">30 compressions , 2 breaths</text><text x="100" y="140" text-anchor="middle" fill="#888780" font-size="9" font-family="Arial">Repeat continuously</text>` },
+    { label: 'Check mouth before breaths', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="100" cy="70" rx="22" ry="26" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Only remove what you can see</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Never blindly finger-sweep</text>` },
+    { label: 'If breathing resumes', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="28" cy="82" rx="18" ry="20" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="44" y="75" width="120" height="14" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><ellipse cx="176" cy="82" rx="14" ry="10" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Stop CPR , place on their side</text>` },
+    { label: 'Nothing by mouth', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="72" text-anchor="middle" fill="#888780" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">No water, no food</text>` },
+    { label: 'Do not leave them alone', svg: `<rect width="200" height="150" fill="#1C1C1A"/><ellipse cx="55" cy="60" rx="16" ry="18" fill="none" stroke="#E0D4C0" stroke-width="2"/><rect x="41" y="76" width="28" height="32" rx="7" fill="none" stroke="#E0D4C0" stroke-width="2"/><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Someone must stay at all times</text>` },
+    { label: 'Note time it started', svg: `<rect width="200" height="150" fill="#1C1C1A"/><text x="100" y="68" text-anchor="middle" fill="#FFEAA0" font-size="26" font-family="Arial"></text><text x="100" y="140" text-anchor="middle" fill="#5DCAA5" font-size="10" font-family="Arial">Note time choking started</text><text x="100" y="148" text-anchor="middle" fill="#888780" font-size="8" font-family="Arial">Tell medical staff</text>` },
+   ],
+  },
+ },
 };
 
 
@@ -1742,7 +1891,7 @@ function resetAnimation() {
 }
 
 // ── SITUATION METADATA & LOOKUP HELPERS ─────────────────────────────────
-const SITUATION_ORDER = ['bleeding', 'burn', 'headache', 'fainting', 'allergic', 'sprain', 'eyeinjury', 'nosebleed'];
+const SITUATION_ORDER = ['bleeding', 'burn', 'headache', 'fainting', 'allergic', 'sprain', 'eyeinjury', 'nosebleed', 'animalbite', 'choking'];
 const SITUATION_META = {
  bleeding: { icon: "", priority: 2 },
  burn: { icon: "", priority: 2 },
@@ -1751,7 +1900,9 @@ const SITUATION_META = {
  allergic: { icon: "", priority: 1 },
  sprain: { icon: "", priority: 3 },
  eyeinjury: { icon: "", priority: 2 },
- nosebleed: { icon: "", priority: 3 }
+ nosebleed: { icon: "", priority: 3 },
+ animalbite: { icon: "🐾", priority: 2 },
+ choking: { icon: "🫁", priority: 1 }
 };
 
 function SITUATIONS() {
@@ -1804,8 +1955,7 @@ function setLanguage(lang) {
  document.getElementById('resetBtn').textContent = tr('resetBtn');
  document.getElementById('logLinkBtn').textContent = tr('logLinkBtn');
  document.getElementById('logPrompt').textContent = tr('logPrompt');
- document.getElementById('voiceSettingsSummary').textContent = tr('voiceSettingsSummary');
- document.getElementById('voiceSelectLabel').textContent = tr('voiceSelectLabel');
+ document.getElementById('langSwitcherLabel').textContent = tr('langSwitcherLabel');
  document.getElementById('recordingUploadLabel').textContent = tr('recordingUploadLabel');
  document.getElementById('recordingHint').textContent = tr('recordingHint');
 
@@ -2007,6 +2157,7 @@ function buildOptions() {
   btn.onclick = function() { markDeviceUsed(); showTriageScreen(key); };
   grid.appendChild(btn);
  });
+ _gsapStaggerIn(grid, '.tray-item');
 }
 
 // ── TRIAGE FLOW ─────────────────────────────────────────────────────────
@@ -2276,6 +2427,7 @@ function selectSituation(key, queue, totalMentioned, fuzzyTranscript, triageLeve
   })(i);
   list.appendChild(li);
  });
+ _gsapStaggerIn(list, 'li');
  // Show first step animation immediately
  showStepAnimation(key, 0);
 
@@ -2448,7 +2600,7 @@ function speakGuidance() {
    showGuidanceDoneBanner();
    showGuidanceRestockBanner(key, level);
    // Ask if user wants to repeat the steps
-   askToRepeatSteps();
+   askToRepeatSteps(function() { speakGuidance(); });
   }, 800);
  });
 }
@@ -2460,14 +2612,14 @@ const LANG_VOICE_HINTS = {
 };
 
 // NOTE: voice listing/selection is handled entirely by populateBrowserVoices()
-// and setBrowserVoice() further down (── Browser voice list ── section).
-// There used to be a second, separate implementation here (loadVoices(),
-// wired to the legacy #voiceSelect dropdown) that raced with it for the
-// speechSynthesis.onvoiceschanged handler and reset the user's chosen voice
-// back to a "best guess" every time the voice list reloaded, so a voice
-// picked from #voiceSelect would silently stop applying. It has been
-// removed; #voiceSelect is now just a second view onto the same
-// populateBrowserVoices()/setBrowserVoice() state as #browserVoiceSelect.
+// and setBrowserVoice() further down (── Browser voice list ── section) ,
+// there is a single Voice settings panel (#voicePanel) with one browser
+// voice picker (#browserVoiceSelect). There used to be a second, separate
+// implementation here (loadVoices()) plus a whole duplicate settings panel
+// at the bottom of the page with its own #voiceSelect dropdown; both were
+// removed since a second control for the same setting was confusing and
+// had caused the picked voice to silently stop applying (loadVoices()
+// reset it to a "best guess" every time the voice list reloaded).
 
 document.getElementById('recordingUpload').addEventListener('change', function(e) {
  const files = Array.from(e.target.files);
@@ -2512,8 +2664,10 @@ function selectVoiceEngine(engine) {
  // Show/hide settings sections
  var apiSection = document.getElementById('voiceApiSection');
  var browserSection = document.getElementById('voiceBrowserSection');
+ var recordedSection = document.getElementById('voiceRecordedSection');
  if (apiSection) apiSection.style.display = engine === 'eleven' ? 'block': 'none';
  if (browserSection) browserSection.style.display = engine === 'browser' ? 'block': 'none';
+ if (recordedSection) recordedSection.style.display = engine === 'recorded' ? 'block': 'none';
 
  // Update label
  var label = document.getElementById('voiceActiveLabel');
@@ -2692,15 +2846,12 @@ function testBrowserVoice() {
 }
 
 // ── Browser voice list ────────────────────────────────────────────────
-// Single source of truth for voice listing/selection. Drives BOTH the
-// grouped picker in the Voice settings panel (#browserVoiceSelect) and the
-// plain "System voice" dropdown at the bottom of the page (#voiceSelect) ,
-// so no matter which control the person uses, the choice is the same
-// underlying state (persisted to localStorage via setBrowserVoice).
+// Single source of truth for voice listing/selection , drives the voice
+// picker in the Voice settings panel (#browserVoiceSelect), persisted to
+// localStorage via setBrowserVoice().
 function populateBrowserVoices() {
  var select = document.getElementById('browserVoiceSelect');
- var legacySelect = document.getElementById('voiceSelect');
- if ((!select && !legacySelect) || !('speechSynthesis' in window)) return;
+ if (!select || !('speechSynthesis' in window)) return;
 
  var voices = window.speechSynthesis.getVoices();
  if (voices.length === 0) return;
@@ -2755,16 +2906,6 @@ function populateBrowserVoices() {
   }
  }
 
- if (legacySelect) {
-  legacySelect.innerHTML = '';
-  sorted.forEach(function(v) {
-   var opt = document.createElement('option');
-   opt.value = v.name;
-   opt.textContent = v.name + ' (' + v.lang + ')';
-   legacySelect.appendChild(opt);
-  });
- }
-
  // Restore saved selection , or fall back to the best language-appropriate
  // guess (without persisting it, so we don't lock in a choice the person
  // never actually made).
@@ -2781,7 +2922,6 @@ function populateBrowserVoices() {
  }
  if (chosenName) {
   if (select) select.value = chosenName;
-  if (legacySelect) legacySelect.value = chosenName;
   var match = voices.find(function(v) { return v.name === chosenName; });
   if (match && typeof selectedVoice !== 'undefined') selectedVoice = match;
  }
@@ -2817,11 +2957,8 @@ function setBrowserVoice(name) {
   var label = document.getElementById('voiceActiveLabel');
   if (label) label.textContent = name + ' (' + match.lang + ')';
  }
- // Keep both selectors in sync regardless of which one triggered the change
  var select = document.getElementById('browserVoiceSelect');
- var legacySelect = document.getElementById('voiceSelect');
  if (select && select.value !== name) select.value = name;
- if (legacySelect && legacySelect.value !== name) legacySelect.value = name;
 }
 
 // Populate voices when they load
@@ -2880,6 +3017,8 @@ const STOCK_DEDUCTION_MAP = {
  sprain:  { l1:[6],    l2:[6],    l3:[6]   },
  eyeinjury:{ l1:[11,12],  l2:[11,12],  l3:[11,12] },
  nosebleed:{ l1:[6],    l2:[6],    l3:[]   },
+ animalbite:{ l1:[5,1],  l2:[9,5,3],  l3:[9,3] },
+ choking: { l1:[],    l2:[],    l3:[]   },
 };
 
 // ── State , persisted in sessionStorage ──────────────────────────────
@@ -3208,16 +3347,19 @@ function hideGuidanceDoneBanner() {
  steps.forEach(function(li) { li.classList.remove('step-done'); });
 }
 
-function askToRepeatSteps() {
- // Ask user if they want to hear the steps again
+// Ask (by voice) whether to repeat the steps just read, and re-run
+// onRepeat() if the answer sounds like yes. Used after guidance steps
+// (minor situations) and after waiting steps (moderate/severe , while
+// waiting for Sickbay/Med Assistant or the clinic/ambulance), so every
+// step-by-step reading in the app offers a repeat, not just the minor one.
+function askToRepeatSteps(onRepeat) {
  var repeatQuestion = 'Do you want to hear the steps again?';
  _speakOne(repeatQuestion, function() {
-  // Listening for user's response
-  startListeningForRepeat();
+  startListeningForRepeat(onRepeat);
  });
 }
 
-function startListeningForRepeat() {
+function startListeningForRepeat(onRepeat) {
  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) return;
  var recognition = new (window.webkitSpeechRecognition || window.SpeechRecognition)();
  recognition.lang = SPEECH_LANG_MAP[currentLang] || 'en-US';
@@ -3232,8 +3374,8 @@ function startListeningForRepeat() {
   transcript = transcript.toLowerCase().trim();
   // Check for yes-like responses (yes, yeah, ya, repeat, again, ok, sure)
   var yesPatterns = /^(yes|yeah|ya|repeat|again|ok|okay|sure|affirmative|true)$/i;
-  if (yesPatterns.test(transcript)) {
-   document.getElementById('speakBtn').click();
+  if (yesPatterns.test(transcript) && typeof onRepeat === 'function') {
+   onRepeat();
   }
  };
  recognition.onerror = function() {
@@ -3373,6 +3515,7 @@ function showQuickSituationPicker(level) {
  });
 
  box.classList.remove('hidden');
+ _gsapStaggerIn(grid, '.quick-situation-item');
 }
 
 function pickWaitingSituation(key) {
@@ -3472,6 +3615,7 @@ function showWaitingSteps(levelData, headerText, situationKey) {
   list.appendChild(li);
  });
  box.classList.remove('hidden');
+ _gsapStaggerIn(list, 'li');
 
  // Show alert animation panel , first waiting frame immediately
  var wrap = document.getElementById('alertAnimWrap');
@@ -3520,6 +3664,9 @@ function speakWaitingSteps(situationKey) {
   var sLevel = window._currentTriageLevel || 'l3';
   setTimeout(function() {
    showWaitingDoneBanner(sKey, sLevel);
+   // Ask if user wants to repeat the steps , same as the minor/guidance
+   // flow, so moderate and severe waiting-step readings offer this too.
+   askToRepeatSteps(function() { speakWaitingSteps(sKey); });
   }, 1000);
  });
 }
@@ -3580,6 +3727,44 @@ function updateTimerDisplay(seconds) {
  document.getElementById('timerValue').textContent = m + ':' + s;
 }
 
+// ── GSAP MOTION LAYER ─────────────────────────────────────────────────
+// window.gsap is loaded from CDN in app/page.js (beforeInteractive), so
+// it's ready before this script runs. Every helper here degrades to the
+// existing CSS keyframe transition if gsap failed to load for any reason,
+// and every helper respects prefers-reduced-motion.
+function _reducedMotion() {
+ return !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+}
+
+function _gsapScreenIn(target) {
+ if (typeof gsap === 'undefined') {
+  target.classList.remove('screen-fade-in');
+  void target.offsetWidth;
+  target.classList.add('screen-fade-in');
+  return;
+ }
+ var reduced = _reducedMotion();
+ gsap.killTweensOf(target);
+ gsap.fromTo(target,
+  { opacity: 0, y: reduced ? 0 : 6 },
+  { opacity: 1, y: 0, duration: reduced ? 0.01 : 0.32, ease: 'power1.out', clearProps: 'opacity,transform' }
+ );
+}
+
+// Subtle staggered reveal for a freshly-populated list/grid , used right
+// after building step lists, the supply tray, or the stock/setup lists.
+function _gsapStaggerIn(containerEl, itemSelector) {
+ if (typeof gsap === 'undefined' || !containerEl) return;
+ var items = containerEl.querySelectorAll(itemSelector);
+ if (!items.length) return;
+ var reduced = _reducedMotion();
+ gsap.killTweensOf(items);
+ gsap.fromTo(items,
+  { opacity: 0, y: reduced ? 0 : 8 },
+  { opacity: 1, y: 0, duration: reduced ? 0.01 : 0.3, ease: 'power1.out', stagger: reduced ? 0: 0.035, clearProps: 'opacity,transform' }
+ );
+}
+
 function showScreen(id) {
  const screens = ['homeScreen', 'guidanceScreen', 'alertScreen', 'logScreen', 'triageScreen', 'setupScreen', 'restockScreen'];
  const target = document.getElementById(id);
@@ -3591,9 +3776,7 @@ function showScreen(id) {
  });
 
  target.classList.remove('hidden');
- target.classList.remove('screen-fade-in');
- void target.offsetWidth;
- target.classList.add('screen-fade-in');
+ _gsapScreenIn(target);
 }
 
 function toggleLog() {

@@ -16,6 +16,16 @@ export default function Home() {
    <div dangerouslySetInnerHTML={{ __html: bodyMarkup }} />
    <audio id="audioPlayer" className="hidden"></audio>
 
+   {/* GSAP core, loaded from CDN as a plain global (window.gsap) , not
+     imported from the npm package, because smartaid-app.js is a static
+     script (public/), not bundled by webpack, so it can't `import` an
+     npm module. strategy="beforeInteractive" guarantees window.gsap
+     exists before the afterInteractive script below runs. */}
+   <Script
+    src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"
+    strategy="beforeInteractive"
+   />
+
    {/* Boots the original app logic (voice recognition, fuzzy matching,
      triage data, stock tracking, ElevenLabs/browser TTS, alerts,
      activity log) after the markup above is in the DOM. */}

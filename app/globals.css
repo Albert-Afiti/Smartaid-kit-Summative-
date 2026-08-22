@@ -4,6 +4,8 @@
    backend/server is involved anywhere in this project.
    ═════════════════════════════════════════════════════════════════════ */
 
+  @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap');
+
   :root {
     --cherry: #990011;
     --cherry-dark: #6E0C0E;
@@ -12,12 +14,26 @@
     --grey: #6B6B6B;
     --line: #E8E0DF;
     --green: #0F6E56;
+    --green-dark: #0B5A45;
     --green-bg: #E1F5EE;
+    /* "Help -> Sickbay/Med Assistant" pathway color. Deliberately NOT a
+       new hue , amber is already this app's established "moderate /
+       attention" color (Moderate triage level, the waiting-for-help box,
+       the first-use hint), so reusing it here keeps Help visually tied
+       to the rest of the palette instead of introducing an unrelated
+       color. Full 3-tier ladder: green (Assess, calm) -> amber (Help,
+       moderate) -> red (Emergency, severe) , plus white/cream/grey
+       neutrals everywhere else, per standard first-aid UI convention. */
+    --amber: #E65100;
+    --amber-dark: #A93B00;
+    --amber-bg: #FFF3E0;
+    --amber-text: #8A5A00;
+    --focus-ring: #2563EB;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+    font-family: 'Figtree', -apple-system, "Segoe UI", Arial, sans-serif;
     background: var(--cream);
     color: var(--dark);
     min-height: 100vh;
@@ -25,6 +41,26 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+  }
+
+  /* ── ACCESSIBILITY BASELINE ────────────────────────────────────────
+     Visible keyboard focus, pointer affordance on every clickable
+     element (many are divs/spans wired via onclick, which don't get a
+     pointer cursor by default), and full support for people who have
+     asked their system to reduce motion. */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  [onclick]:not(:disabled) { cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
   .device {
     width: 100%;
@@ -65,24 +101,41 @@
   .conn-indicator, .battery-indicator { font-size: 10px; white-space: nowrap; opacity: 0.75; }
   .conn-indicator { display: none; }
   @media (min-width: 380px) { .conn-indicator { display: inline; } }
+  /* Always-visible language bar , sits above Voice settings so it can be
+     switched in one tap, without expanding any panel. */
+  .lang-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 24px;
+    background: #FAF7F6;
+    border-top: 1px solid var(--line);
+  }
+  .lang-bar-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--grey);
+    font-weight: 700;
+  }
   .lang-switcher {
     display: flex;
-    gap: 2px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 8px;
-    padding: 2px;
+    gap: 6px;
   }
   .lang-btn {
-    border: none;
-    background: none;
-    color: rgba(255,255,255,0.6);
-    font-size: 10.5px;
+    border: 1.5px solid var(--line);
+    background: #fff;
+    color: var(--grey);
+    font-size: 11px;
     font-weight: 700;
-    padding: 3px 7px;
+    padding: 5px 12px;
     border-radius: 6px;
     cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
   }
-  .lang-btn.active { background: #fff; color: #1C1C1B; }
+  .lang-btn.active { background: var(--cherry); border-color: var(--cherry); color: #fff; }
   .first-use-hint {
     background: #FFF6E0;
     color: #8A5A00;
@@ -124,15 +177,27 @@
     margin-bottom: 12px;
   }
   .kit-header .label {
-    font-size: 11px;
+    font-size: 13px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    opacity: 0.75;
+    font-weight: 800;
+    opacity: 1;
+  }
+  .kit-header-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
   }
   .kit-header h1 {
-    margin: 4px 0 0;
+    margin: 0;
     font-size: 20px;
     font-weight: 700;
+  }
+  .kit-header-cross {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
   }
   .lid-panel {
     background: #FBEAEA;
@@ -180,16 +245,16 @@
     cursor: pointer;
     font-size: 11.5px;
     font-weight: 700;
-    transition: transform 0.1s, opacity 0.15s;
+    transition: transform 0.1s, opacity 0.15s, background 0.2s;
   }
   .kit-btn:active { transform: scale(0.96); }
   .kit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .kit-btn.press-confirm { box-shadow: 0 0 0 4px rgba(255,255,255,0.55) inset; }
   .kit-btn-icon { font-size: 18px; }
-  .assess-btn { background: var(--cherry); color: #fff; }
-  .assess-btn.listening { background: var(--cherry-dark); animation: micPulse 1s infinite; }
-  .help-btn { background: #B5651D; color: #fff; }
-  .emergency-btn { background: var(--green); color: #fff; }
+  .assess-btn { background: var(--green); color: #fff; }
+  .assess-btn.listening { background: var(--green-dark); animation: micPulse 1s infinite; }
+  .help-btn { background: var(--amber); color: #fff; }
+  .emergency-btn { background: var(--cherry); color: #fff; }
   .lid-btn-captions {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -204,9 +269,9 @@
     opacity: 0.8;
   }
   @keyframes micPulse {
-    0% { box-shadow: 0 0 0 0 rgba(153,0,17,0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(153,0,17,0); }
-    100% { box-shadow: 0 0 0 0 rgba(153,0,17,0); }
+    0% { box-shadow: 0 0 0 0 rgba(15,110,86,0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(15,110,86,0); }
+    100% { box-shadow: 0 0 0 0 rgba(15,110,86,0); }
   }
   .mic-status {
     text-align: center;
@@ -373,7 +438,7 @@
   }
   .anim-screen-label {
     background: #0E0E0C;
-    color: #555552;
+    color: #888780;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -597,10 +662,10 @@
     cursor: pointer;
     line-height: 1.3;
   }
-  .help-action-btn { background: #B5651D; }
-  .help-action-btn:active { background: #8E4F16; }
-  .emergency-action-btn { background: var(--green); }
-  .emergency-action-btn:active { background: #0B5A45; }
+  .help-action-btn { background: var(--amber); }
+  .help-action-btn:active { background: var(--amber-dark); }
+  .emergency-action-btn { background: var(--cherry); }
+  .emergency-action-btn:active { background: var(--cherry-dark); }
   .alert-screen { text-align: center; padding-top: 10px; }
   .pulse-dot {
     width: 64px; height: 64px;
@@ -623,7 +688,7 @@
   .alert-sub { font-size: 13.5px; color: var(--grey); margin-bottom: 22px; line-height: 1.5; }
   .emergency-now-btn {
     width: 100%;
-    background: var(--green);
+    background: var(--cherry);
     color: #fff;
     border: none;
     border-radius: 12px;
@@ -632,15 +697,20 @@
     font-weight: 700;
     cursor: pointer;
     margin-bottom: 16px;
+    transition: background 0.2s;
   }
+  .emergency-now-btn:active { background: var(--cherry-dark); }
+  /* Waiting-for-Sickbay/Med-Assistant countdown , tinted amber to match
+     the Help pathway so it's visually obvious which contact is being
+     waited on. */
   .timer-box {
-    background: #F5F2F1;
+    background: var(--amber-bg);
     border-radius: 12px;
     padding: 14px;
     margin-bottom: 16px;
   }
-  .timer-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--grey); margin-bottom: 4px; }
-  .timer-value { font-size: 26px; font-weight: 700; color: var(--dark); }
+  .timer-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--amber-text); margin-bottom: 4px; }
+  .timer-value { font-size: 26px; font-weight: 700; color: var(--amber-text); }
   .escalated-box {
     background: var(--green-bg);
     color: var(--green);
@@ -758,28 +828,6 @@
     font-size: 13px;
   }
   #logList li b { color: var(--dark); }
-  .voice-settings {
-    border-top: 1px solid var(--line);
-    padding: 14px 24px 18px;
-    background: #FAF7F6;
-  }
-  .voice-settings summary {
-    font-size: 12.5px;
-    color: var(--grey);
-    cursor: pointer;
-    list-style: none;
-  }
-  .voice-settings summary::-webkit-details-marker { display: none; }
-  .voice-settings summary::before { content: "🔧 "; }
-  .voice-row { margin-top: 12px; }
-  .voice-row label {
-    display: block;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--grey);
-    margin-bottom: 5px;
-  }
   select, input[type="file"] {
     width: 100%;
     font-size: 13px;
@@ -790,22 +838,23 @@
     color: var(--dark);
     margin-bottom: 10px;
   }
-  .voice-hint {
-    font-size: 11.5px;
-    color: var(--grey);
-    line-height: 1.5;
-    margin: 0;
-  }
   .voice-fallback-note {
-    font-size: 11.5px;
-    color: #8A5A00;
-    background: #FFF6E0;
-    border-radius: 8px;
+    font-size: 11px;
+    color: #FCD34D;
+    background: #2E1A0A;
+    border-left: 3px solid #F59E0B;
+    border-radius: 4px;
     padding: 8px 10px;
     line-height: 1.5;
-    margin-top: 6px;
+    margin-top: 8px;
   }
   .voice-fallback-note.hidden { display: none; }
+  .voice-file-label {
+    display: block;
+    font-size: 11px;
+    color: #888780;
+    margin-bottom: 6px;
+  }
 
   /* ── STOCK TRACKING SYSTEM ─────────────────────────────────────── */
   .stock-bar {
@@ -857,7 +906,7 @@
   .stock-item-num {
     font-size: 10px;
     font-weight: 700;
-    color: #555552;
+    color: #888780;
     min-width: 22px;
   }
   .stock-item-name { color: #C8C4BC; flex: 1; }
@@ -1017,7 +1066,7 @@
     font-weight: 700;
     letter-spacing: 1.2px;
     text-transform: uppercase;
-    color: #555552;
+    color: #888780;
     padding: 12px 16px 6px;
   }
   .setup-item-row {
@@ -1115,7 +1164,7 @@
   .stock-setup-btn {
     background: none;
     border: none;
-    color: #555552;
+    color: #888780;
     font-size: 13px;
     cursor: pointer;
     padding: 0 0 0 8px;
@@ -1175,7 +1224,7 @@
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    color: #555552;
+    color: #888780;
     margin-bottom: 8px;
   }
   .voice-option-row {
@@ -1224,6 +1273,14 @@
     background: #141412; border: 1px solid #2E2E2C; border-radius: 6px;
     color: #E0D4C0; font-size: 12px; font-family: monospace; margin-bottom: 6px;
     box-sizing: border-box;
+  }
+  /* Higher specificity than the global `input[type="file"]` light-theme
+     rule, so the recording upload stays on-theme inside the dark panel. */
+  input[type="file"].voice-api-input {
+    background: #141412;
+    color: #E0D4C0;
+    border: 1px solid #2E2E2C;
+    font-family: inherit;
   }
   .voice-api-input::placeholder { color: #555552; }
   .voice-api-select {
