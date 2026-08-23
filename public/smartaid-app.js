@@ -57,6 +57,9 @@ const UI = {
   didYouMean: "We heard \"{t}\" and guessed {label} , not certain, so please confirm.",
   notThis: "Not this",
   pickCorrect: "Tap the correct one:",
+  triageSayLevels: "Say minor, moderate, or severe.",
+  triageSorryRepeat: "Sorry, say minor, moderate, or severe.",
+  triageListenAgain: "Say \"minor\", \"moderate\", or \"severe\"",
   micError: "Couldn't hear that ({e}). Try again or use the buttons below.",
   backLink: "← Back",
   speakBtnLabel: "Repeat steps out loud",
@@ -103,6 +106,9 @@ const UI = {
   didYouMean: "Nous avons entendu « {t} » et deviné {label} , pas certain, merci de confirmer.",
   notThis: "Pas ça",
   pickCorrect: "Touchez la bonne situation :",
+  triageSayLevels: "Dites léger, modéré, ou grave.",
+  triageSorryRepeat: "Désolé, dites léger, modéré, ou grave.",
+  triageListenAgain: "Dites « léger », « modéré », ou « grave »",
   micError: "Impossible d'entendre ({e}). Réessayez ou utilisez les boutons ci-dessous.",
   backLink: "← Retour",
   speakBtnLabel: "Répéter les étapes à voix haute",
@@ -149,6 +155,9 @@ const UI = {
   didYouMean: "Twumvise \"{t}\" maze tugerageza kumenya {label} , ntibyemejwe neza, nyamuneka emeza.",
   notThis: "Ntabwo ari ibi",
   pickCorrect: "Kanda ikibazo nyacyo:",
+  triageSayLevels: "Vuga byoroheje, bigifite ingaruka, cyangwa bikaze.",
+  triageSorryRepeat: "Mbabarira, vuga byoroheje, bigifite ingaruka, cyangwa bikaze.",
+  triageListenAgain: "Vuga \"byoroheje\", \"bigifite ingaruka\", cyangwa \"bikaze\"",
   micError: "Ntitwashoboye kumva neza ({e}). Ongera ugerageze cyangwa ukoreshe buto zo hasi.",
   backLink: "← Subira inyuma",
   speakBtnLabel: "Subiramo intambwe zivugwa",
@@ -546,47 +555,322 @@ const TRIAGE = {
  }
 };
 
-// French and Kinyarwanda inherit EN guidance but translate UI labels and question text
+// French and Kinyarwanda now have their own fully independent, hand-translated
+// guidance content below (not derived/copied from English) , covering steps,
+// spoken text, and waiting-step guidance for every severity level.
 TRIAGE.fr = {
  question: "Quelle est la gravité ?",
  levels: { l1: "Léger", l2: "Modéré", l3: "Grave , Urgence" },
- situations: Object.fromEntries(Object.entries(TRIAGE.en.situations).map(([key, s]) => [key, {
-  question: TRIAGE.en.situations[key].question,
-  l1: { ...s.l1 }, l2: { ...s.l2 }, l3: { ...s.l3 }
- }]))
+ situations: {
+  bleeding: {
+   question: "Quelle est la gravité du saignement ?",
+   l1: { label: "Léger", desc: "Petite coupure ou éraflure, saignement lent et minime", autoAction: null,
+    steps: ["Mettez des gants (article n°9).","Nettoyez doucement autour de la plaie avec une lingette antiseptique (article n°5).","Appuyez fermement une gaze stérile (article n°3) sur la plaie.","Maintenez pendant 5 minutes sans soulever.","Couvrez avec un pansement (article n°1) adapté à la plaie."],
+    speak: "Pour une coupure légère, mettez des gants, appuyez fermement une gaze stérile pendant 5 minutes, nettoyez avec une lingette antiseptique, puis couvrez avec un pansement." },
+   l2: { label: "Modéré", desc: "La plaie est plus profonde, le saignement ne s'arrête pas après quelques minutes, ou perte de sang importante", autoAction: "faculty",
+    steps: ["Mettez des gants (article n°9) immédiatement.","Si un vêtement couvre la plaie, utilisez des ciseaux (article n°10) pour le couper , ne tirez pas le vêtement sur la plaie.","Appuyez fermement la gaze stérile (article n°3) , ne soulevez pas pour vérifier.","Si le sang traverse, ajoutez plus de gaze par-dessus , NE retirez PAS la première.","Élevez la zone blessée au-dessus du cœur si possible.","L'infirmerie/l'assistant médical a été alerté , restez calme et maintenez la pression sur la plaie."],
+    speak: "Pour un saignement modéré, mettez des gants, appuyez fermement la gaze et ne la soulevez pas. Si le sang traverse, ajoutez-en par-dessus. Élevez le membre. L'infirmerie/l'assistant médical a été alerté.",
+    waitingSteps: ["Continuez à appuyer fermement la gaze , ne la soulevez pas pour vérifier la plaie.", "Si le sang traverse, ajoutez plus de gaze par-dessus , ne retirez pas la première couche.", "Élevez le bras ou la jambe blessé au-dessus du niveau du cœur.", "Aidez la personne à s'asseoir ou à s'allonger , elle ne doit pas rester debout.", "Parlez-lui calmement , dites-lui que les secours arrivent et qu'elle s'en sort bien.", "Continuez à surveiller , les secours sont déjà en route."] },
+   l3: { label: "Grave", desc: "Saignement abondant et incontrôlé, plaie du cuir chevelu, entaille profonde, ou artère possiblement touchée", autoAction: "emergency",
+    steps: ["Si un vêtement couvre la plaie, utilisez des ciseaux (article n°10) pour le couper immédiatement , ne tirez pas sur la plaie.","Appuyez FORT sur la plaie avec tout ce qui est disponible , tissu, gaze, vos mains.","NE retirez PAS le tissu. Ajoutez-en par-dessus s'il est trempé.","Maintenez une pression ferme et continue , ne vous arrêtez pas.","Les services d'urgence sont contactés maintenant.","Restez avec la personne. Parlez-lui calmement. Ne la déplacez pas sauf en cas de danger."],
+    speak: "Saignement grave. Appuyez fort sur la plaie et ne retirez pas le tissu. Ajoutez-en par-dessus si nécessaire. Maintenez une pression ferme. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["Continuez à appuyer FORT , ne relâchez la pression pour aucune raison jusqu'à l'arrivée des secours.", "Si le sang traverse, ajoutez plus de tissu ou de gaze PAR-DESSUS , ne retirez jamais ce qui est déjà sur la plaie.", "Élevez le membre blessé au-dessus du niveau du cœur si possible.", "Gardez la personne allongée , ne la laissez pas se lever ou marcher.", "Parlez-lui calmement , gardez-la consciente et rassurée.", "Ne donnez pas d'eau ou de nourriture , elle pourrait avoir besoin d'une intervention chirurgicale."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : continuez à appuyer fort sur la plaie. Ne retirez pas le tissu. Ajoutez-en par-dessus si nécessaire. Élevez le membre. Gardez la personne allongée. Parlez-lui calmement et ne lui donnez rien à manger ou à boire." }
+  },
+  burn: {
+   question: "Quelle est la gravité de la brûlure ?",
+   l1: { label: "Légère", desc: "Petite zone, peau rouge, pas de cloques", autoAction: null,
+    steps: ["Faites couler de l'eau fraîche sur la brûlure pendant au moins 10 minutes.","N'utilisez PAS de glace, de beurre, ou de dentifrice.","Couvrez sans serrer avec une gaze stérile non adhésive (article n°4).","Ne percez pas les cloques qui se forment.","Si la brûlure est petite et la personne bien consciente, un comprimé antidouleur (article n°7) peut être donné si autorisé dans votre établissement , NE PAS donner pour les grandes brûlures ou brûlures graves."],
+    speak: "Pour une brûlure légère, faites couler de l'eau fraîche pendant au moins 10 minutes. N'utilisez pas de glace. Couvrez sans serrer avec la gaze non adhésive. Ne percez pas les cloques." },
+   l2: { label: "Modérée", desc: "Cloques, zone plus large touchée, ou brûlure au visage, aux mains ou aux articulations", autoAction: "faculty",
+    steps: ["Faites couler de l'eau fraîche sur la brûlure pendant au moins 15 minutes.","Si le vêtement N'est PAS collé à la brûlure, utilisez des ciseaux (article n°10) pour le couper avec précaution , ne le tirez jamais sur la brûlure.","NE retirez PAS un vêtement collé à la brûlure.","Couvrez sans serrer avec une gaze stérile non adhésive (article n°4) , n'enveloppez pas trop serré.","L'infirmerie/l'assistant médical a été alerté , cela nécessite un examen médical professionnel.","Gardez la personne calme et immobile."],
+    speak: "Pour une brûlure modérée, faites couler de l'eau fraîche pendant 15 minutes. Ne retirez pas les vêtements collés. Couvrez sans serrer avec la gaze non adhésive. L'infirmerie/l'assistant médical a été alerté.",
+    waitingSteps: ["Continuez à faire couler de l'eau fraîche sur la brûlure , réglez une minuterie de 15 minutes et n'arrêtez pas trop tôt.", "Ne retirez aucun vêtement collé à la brûlure , laissez cela au personnel médical.", "N'appliquez rien sur la brûlure , ni glace, ni beurre, ni crème.", "Une fois rincée, couvrez sans serrer avec une gaze stérile non adhésive (article n°4) , n'enveloppez pas trop serré.", "Rassurez la personne calmement , dites-lui que les secours arrivent.", "Continuez à surveiller , les secours sont déjà en route."] },
+   l3: { label: "Grave", desc: "Grande zone, peau carbonisée ou blanche, brûlure chimique ou électrique, ou brûlure près du visage ou des voies respiratoires", autoAction: "emergency",
+    steps: ["Faites couler de l'eau fraîche sur la brûlure pendant au moins 20 minutes , ceci s'applique à TOUTES les brûlures, y compris les grandes et graves. N'utilisez PAS de glace ou d'eau très froide.","NE touchez PAS directement la zone brûlée.","Gardez la personne immobile et aussi calme que possible.","En cas de brûlure chimique sur la peau : utilisez des ciseaux (article n°10) pour couper avec précaution les vêtements non collés , ne tirez jamais , puis rincez immédiatement à l'eau.","Les services d'urgence sont contactés maintenant."],
+    speak: "Brûlure grave. Ne touchez pas la zone brûlée. Gardez la personne immobile. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["NE touchez PAS, ne frottez PAS et ne couvrez PAS la zone brûlée avec quoi que ce soit de collant ou de pelucheux.", "N'appliquez PAS de glace, de beurre, de dentifrice ou tout autre remède maison.", "Ne retirez PAS de vêtement collé à la brûlure , laissez cela au personnel médical.", "Gardez la personne immobile et aussi calme que possible.", "NE donnez PAS de nourriture ou d'eau par la bouche , la personne pourrait avoir besoin d'une chirurgie sous anesthésie.", "S'il y a de la fumée dans la zone, déplacez la personne vers l'air frais si cela est sûr."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : ne touchez pas la zone brûlée. N'y appliquez rien. Ne retirez pas de vêtement collé. Gardez la personne immobile. Autorisez de petites gorgées d'eau si elle est consciente." }
+  },
+  headache: {
+   question: "Quelle est la gravité du mal de tête ?",
+   l1: { label: "Léger", desc: "Mal de tête léger, la personne est alerte et fonctionnelle", autoAction: null,
+    steps: ["Déplacez-vous vers un endroit calme, frais et sombre.","Buvez de l'eau lentement , la déshydratation est la cause la plus fréquente.","Si autorisé, prenez un comprimé antidouleur (article n°7) selon l'étiquette.","Reposez-vous 15 à 20 minutes.","Si le mal de tête s'aggrave ou s'accompagne de nausées, appuyez sur Aide."],
+    speak: "Pour un mal de tête léger, allez dans un endroit calme et frais, buvez de l'eau, et reposez-vous. Prenez un comprimé antidouleur si autorisé. Si cela s'aggrave, appuyez sur Aide." },
+   l2: { label: "Modéré", desc: "Persistant, s'aggrave, ou accompagné de nausées, vertiges ou sensibilité à la lumière", autoAction: "faculty",
+    steps: ["Aidez la personne à s'asseoir ou à s'allonger dans un endroit calme et frais.","Desserrez tout vêtement serré autour du cou ou de la tête.","Offrez de l'eau si elle n'a pas de nausées.","L'infirmerie/l'assistant médical a été alerté , surveillez la personne jusqu'à l'arrivée des secours.","Ne la laissez pas seule."],
+    speak: "Pour un mal de tête modéré avec vertiges ou nausées, aidez la personne à se reposer dans un endroit frais, desserrez les vêtements serrés, et offrez de l'eau. L'infirmerie/l'assistant médical a été alerté.",
+    waitingSteps: ["Aidez la personne à s'allonger dans un endroit calme, frais et peu éclairé.", "Desserrez tout ce qui est serré autour du cou, du col ou de la poitrine.", "Offrez de petites gorgées d'eau , ne la forcez pas à boire.", "Ne donnez aucun médicament sauf s'il est déjà prescrit pour cette personne.", "Restez avec elle et parlez doucement , rassurez-la que les secours arrivent.", "Continuez à surveiller , les secours sont déjà en route."] },
+   l3: { label: "Grave", desc: "Soudain, sévère , décrit comme le pire mal de tête de sa vie, ou avec confusion, troubles de la vision, ou faiblesse", autoAction: "emergency",
+    steps: ["Gardez la personne immobile , ne la déplacez pas inutilement.","Ne donnez aucun médicament.","Si elle perd connaissance, placez-la en position latérale de sécurité.","Les services d'urgence sont contactés maintenant.","Restez avec elle et parlez calmement."],
+    speak: "Mal de tête soudain et grave. Gardez la personne immobile, ne donnez pas de médicament. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["Gardez la personne complètement immobile , ne la déplacez pas sauf danger immédiat.", "NE donnez AUCUN médicament contre la douleur , cela peut masquer des symptômes que les médecins doivent voir.", "Baissez la lumière et réduisez le bruit autour d'elle si possible , la lumière et le bruit aggravent ce type de mal de tête.", "Si elle vomit, tournez-la doucement sur le côté pour éviter l'étouffement.", "Si elle devient confuse ou perd connaissance, vérifiez sa respiration et placez-la en position latérale de sécurité.", "Restez avec elle et notez l'heure de début du mal de tête , informez le personnel médical."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : gardez la personne immobile. Ne donnez pas de médicament. Baissez la lumière et réduisez le bruit. Si elle vomit, tournez-la doucement sur le côté. Restez avec elle et notez l'heure du début." }
+  },
+  fainting: {
+   question: "Quel est l'état actuel de la personne ?",
+   l1: { label: "Récupération rapide", desc: "La personne a repris connaissance en moins d'une minute et se sent bien", autoAction: null,
+    steps: ["Allongez la personne sur le dos.","Surélevez ses jambes d'environ 30 cm au-dessus du niveau du cœur.","Desserrez tout ce qui est serré autour du cou ou de la poitrine.","Donnez de petites gorgées d'eau une fois bien réveillée.","Surveillez pendant 15 minutes avant de la laisser se lever."],
+    speak: "La personne a récupéré. Allongez-la, surélevez légèrement ses jambes, desserrez les vêtements serrés, et donnez de petites gorgées d'eau une fois bien réveillée." },
+   l2: { label: "Récupération lente", desc: "Confuse, groggy, lente à répondre, ou évanouissement sans cause évidente", autoAction: "faculty",
+    steps: ["Allongez la personne , ne la faites pas asseoir tout de suite.","Desserrez les vêtements autour du cou et de la poitrine.","Vérifiez qu'elle respire normalement.","L'infirmerie/l'assistant médical a été alerté , restez avec elle jusqu'à l'arrivée des secours.","Si elle arrête de respirer ou ne répond plus, appuyez sur Urgence immédiatement."],
+    speak: "La personne récupère lentement. Gardez-la allongée, desserrez les vêtements serrés, et vérifiez qu'elle respire. L'infirmerie/l'assistant médical a été alerté.",
+    waitingSteps: ["Gardez la personne allongée à plat , ne la faites pas asseoir tout de suite.", "Desserrez les vêtements autour du cou, de la poitrine et de la taille.", "Vérifiez qu'elle respire toutes les 30 secondes , regardez, écoutez, sentez.", "Si elle devient bien réveillée, offrez de petites gorgées d'eau et aidez-la à s'asseoir lentement.", "Restez avec elle et parlez calmement , dites-lui où elle se trouve et que les secours arrivent.", "Si elle arrête de respirer et que vous êtes formé, commencez la RCP , les secours arrivent déjà."] },
+   l3: { label: "Inconsciente / ne répond pas", desc: "La personne n'est pas consciente, ne répond pas, ou ne respire pas normalement", autoAction: "emergency",
+    steps: ["Vérifiez la respiration , regardez, écoutez, sentez pendant 10 secondes.","Si elle ne respire pas : commencez la RCP si vous êtes formé.","Si elle respire : placez-la en position latérale de sécurité , roulez-la doucement sur le côté, vérifiez la bouche pour vomissements ou obstruction et dégagez si visible, puis inclinez légèrement la tête en arrière pour garder les voies respiratoires ouvertes.","Ne donnez rien par la bouche.","Les services d'urgence sont contactés maintenant. Restez avec elle."],
+    speak: "La personne est inconsciente. Vérifiez la respiration. Si formé, commencez la RCP. Si elle respire, placez-la sur le côté en position latérale de sécurité. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["Vérifiez la respiration toutes les 30 secondes , regardez, écoutez, sentez.", "Si elle respire : gardez-la en position latérale de sécurité (sur le côté, tête légèrement inclinée en arrière) , cela évite l'étouffement en cas de vomissement.", "Si elle ne respire pas et que vous êtes formé : commencez la RCP , 30 compressions thoraciques, 2 insufflations, répétez.", "NE donnez RIEN par la bouche , ni eau, ni nourriture, ni médicament.", "NE la laissez PAS seule , quelqu'un doit rester avec elle en permanence.", "Desserrez les vêtements serrés autour du cou, de la poitrine et de la taille.", "Notez si elle a eu une activité convulsive , informez le personnel médical à leur arrivée."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : continuez à vérifier la respiration. Si elle respire, gardez-la sur le côté. Si elle ne respire pas et que vous êtes formé, commencez la RCP. Ne donnez rien par la bouche. Ne la laissez pas seule." }
+  },
+  allergic: {
+   question: "Quelle est la gravité de la réaction allergique ?",
+   l1: { label: "Légère", desc: "Éruption cutanée, urticaire, ou légères démangeaisons seulement , pas de gonflement, pas de difficulté à respirer", autoAction: null,
+    steps: ["Éloignez la personne de ce qui a déclenché la réaction si possible.","Utilisez un comprimé antihistaminique (article n°8) selon l'étiquette , seulement si autorisé dans votre établissement.","Surveillez pendant 30 minutes pour toute aggravation.","Si un gonflement apparaît, appuyez sur Aide immédiatement.","Gardez la personne calme et assise."],
+    speak: "Pour une réaction allergique légère avec seulement une éruption cutanée, donnez un antihistaminique si autorisé et surveillez pendant 30 minutes. Si un gonflement apparaît, appuyez sur Aide immédiatement." },
+   l2: { label: "Modérée", desc: "Début de gonflement, démangeaisons généralisées, personne anxieuse ou en détresse", autoAction: "faculty",
+    steps: ["Gardez la personne assise et calme.","Si l'antihistaminique est autorisé, donnez-le maintenant (article n°8).","NE donnez RIEN d'autre par la bouche.","L'infirmerie/l'assistant médical a été alerté , surveillez tout gonflement du visage, des lèvres ou de la gorge.","Si la respiration devient difficile, appuyez sur Urgence immédiatement."],
+    speak: "Réaction allergique modérée. Donnez un antihistaminique si autorisé. L'infirmerie/l'assistant médical a été alerté. Surveillez le gonflement de la gorge , si la respiration change, appuyez sur Urgence maintenant.",
+    waitingSteps: ["Donnez le comprimé antihistaminique (article n°8) si autorisé dans votre établissement , suivez le dosage sur l'étiquette.", "Gardez la personne assise et calme , ne la laissez pas marcher.", "Surveillez de près son visage, ses lèvres et sa gorge pour tout gonflement.", "Surveillez tout changement de respiration , écoutez les sifflements ou un son aigu.", "Rassurez-la calmement et dites-lui que les secours arrivent.", "Les secours sont déjà en route , continuez à surveiller sa respiration de près."] },
+   l3: { label: "Grave , Anaphylaxie", desc: "Gonflement du visage, des lèvres ou de la gorge , difficulté à respirer, sifflements, ou effondrement", autoAction: "emergency",
+    steps: ["Les services d'urgence sont contactés maintenant , ceci est une anaphylaxie.","Si la personne a un stylo auto-injecteur (EpiPen), aidez-la à l'utiliser immédiatement sur la cuisse externe.","Si consciente et respire bien : allongez-la à plat avec les jambes surélevées au-dessus du cœur. Si la respiration est difficile : gardez-la assise. Si inconsciente ou vomit : NE l'allongez PAS à plat , placez-la doucement sur le côté en position latérale de sécurité.","Ne donnez rien par la bouche.","Si elle arrête de respirer, commencez la RCP si vous êtes formé."],
+    speak: "Anaphylaxie. Les services d'urgence sont contactés maintenant. Aidez à utiliser l'EpiPen si disponible. Allongez-la avec les jambes surélevées sauf si la respiration est difficile.",
+    waitingSteps: ["Si la personne a un EpiPen : aidez-la à l'injecter dans la cuisse externe , à travers les vêtements, c'est acceptable.", "Si consciente et respire bien : allongez-la avec les jambes surélevées au-dessus du cœur. Si la respiration est difficile : gardez-la assise. Si inconsciente ou vomit : NE l'allongez PAS à plat , placez-la doucement sur le côté.", "NE donnez PAS d'antihistaminiques , ils sont trop lents pour l'anaphylaxie.", "Ne donnez rien par la bouche.", "Une deuxième dose d'EpiPen peut être donnée après 5 à 15 minutes si les symptômes reviennent ou ne s'améliorent pas.", "Restez avec elle , l'anaphylaxie peut s'aggraver rapidement même après une amélioration initiale."],
+    waitingSpeak: "Les secours ont été contactés. Si un EpiPen est disponible, utilisez-le maintenant sur la cuisse externe. Si la respiration est difficile, gardez-la assise. Sinon allongez-la avec les jambes surélevées. Ne donnez rien par la bouche. Restez avec elle." }
+  },
+  sprain: {
+   question: "Quelle est la gravité de la blessure ?",
+   l1: { label: "Légère", desc: "Douleur et gonflement légers, la personne peut encore porter un peu de poids", autoAction: null,
+    steps: ["Reposez immédiatement la zone blessée , arrêtez de l'utiliser.","Appliquez un pack froid (article n°6), enveloppé dans un tissu, pendant 15 minutes.","Enveloppez avec le bandage élastique (article n°2) pour soutenir le gonflement , pas trop serré.","Élevez la zone au-dessus du cœur si possible.","Si la douleur augmente ou si elle ne peut plus porter de poids, appuyez sur Aide."],
+    speak: "Pour une entorse légère, reposez la zone, appliquez le pack froid enveloppé dans un tissu pendant 15 minutes, enveloppez avec le bandage élastique, et élevez si possible." },
+   l2: { label: "Modérée", desc: "Gonflement important, ecchymose, ou la personne ne peut porter aucun poids", autoAction: "faculty",
+    steps: ["Gardez la personne complètement immobile , n'essayez pas de marcher.","Appliquez un pack froid (article n°6), enveloppé dans un tissu, pendant 15 minutes.","N'essayez PAS de redresser ou de manipuler l'articulation.","L'infirmerie/l'assistant médical a été alerté , la personne pourrait avoir besoin d'une radiographie pour écarter une fracture.","Gardez-la calme et la zone élevée."],
+    speak: "Entorse modérée ou fracture possible. Gardez la personne immobile. Appliquez le pack froid. L'infirmerie/l'assistant médical a été alerté , une radiographie pourrait être nécessaire.",
+    waitingSteps: ["Gardez la personne complètement immobile , ne l'encouragez pas à marcher ou à bouger la zone blessée.", "Appliquez le pack froid (article n°6) enveloppé dans un tissu pendant 15 minutes , n'appliquez pas de glace directement sur la peau.", "N'essayez pas de redresser ou d'ajuster l'articulation ou le membre de quelque façon que ce soit.", "Élevez doucement la zone blessée au-dessus du niveau du cœur si cela ne cause pas de douleur supplémentaire.", "Rassurez la personne calmement , dites-lui que vous attendez les secours et qu'elle est en sécurité.", "Continuez à surveiller et à rassurer , les secours arrivent déjà."] },
+   l3: { label: "Grave", desc: "Os visiblement déformé, articulation complètement déplacée, ou douleur sévère avec incapacité de bouger", autoAction: "emergency",
+    steps: ["N'essayez PAS de déplacer ou de réaligner l'articulation ou l'os.","Immobilisez la zone dans la position où vous l'avez trouvée.","Appliquez un pack froid (article n°6) doucement à proximité , pas directement sur une déformité.","Les services d'urgence sont contactés maintenant.","Gardez la personne immobile et calme jusqu'à l'arrivée des secours."],
+    speak: "Fracture ou luxation possible. Ne déplacez pas l'articulation. Immobilisez dans la position trouvée. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["N'essayez PAS de redresser, réaligner, ou remettre l'os ou l'articulation en place , cela relève uniquement des professionnels médicaux.", "Immobilisez la zone exactement comme vous l'avez trouvée , utilisez une serviette roulée, un vêtement, ou tout ce qui est disponible pour la soutenir sans la bouger.", "Ne retirez PAS les chaussures ou vêtements de la zone blessée , le gonflement pourrait rendre cela impossible plus tard et le personnel médical doit le faire avec précaution.", "Appliquez le pack froid (article n°6) PRÈS de la blessure, pas directement sur une déformité visible.", "Gardez la personne immobile et allongée si possible.", "NE donnez PAS de nourriture ou d'eau , elle pourrait avoir besoin d'une chirurgie sous anesthésie.", "Rassurez-la et gardez-la au chaud , le choc est un risque réel avec les fractures."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : ne déplacez pas l'os ou l'articulation. Soutenez-le exactement comme trouvé. Appliquez le pack froid à proximité. Gardez la personne immobile. Ne donnez pas de nourriture ou d'eau. Gardez-la au chaud et rassurez-la." }
+  },
+  eyeinjury: {
+   question: "Quel type de blessure à l'œil ?",
+   l1: { label: "Légère", desc: "Poussière, petite particule, ou légère irritation seulement", autoAction: null,
+    steps: ["NE frottez PAS l'œil.","Utilisez la solution de rinçage oculaire (article n°11) pour rincer doucement pendant 10 minutes.","Maintenez l'œil doucement ouvert et laissez l'eau couler du coin interne vers l'extérieur , NE clignez PAS fort et ne serrez pas la paupière, cela pourrait rayer la cornée.","Couvrez avec une compresse oculaire stérile (article n°12) si l'irritation continue.","Si la particule est encore visible ou l'inconfort persiste, appuyez sur Aide."],
+    speak: "Pour une irritation oculaire légère, ne frottez pas l'œil. Rincez doucement avec la solution de rinçage oculaire pendant 10 minutes. Couvrez avec la compresse oculaire stérile si l'irritation continue." },
+   l2: { label: "Modérée", desc: "Sensation de grattement après rinçage, rougeur persistante, ou petit objet visible sur la surface de l'œil", autoAction: "faculty",
+    steps: ["N'essayez PAS de retirer quoi que ce soit de la surface de l'œil.","Continuez à rincer avec la solution de rinçage oculaire (article n°11) pendant 15 minutes.","Couvrez doucement avec la compresse oculaire stérile (article n°12) , n'appuyez pas.","L'infirmerie/l'assistant médical a été alerté , cela nécessite un examen ophtalmologique professionnel.","Empêchez la personne de frotter ou toucher l'œil."],
+    speak: "Blessure oculaire modérée. Continuez à rincer avec la solution oculaire pendant 15 minutes. Couvrez avec la compresse oculaire stérile. L'infirmerie/l'assistant médical a été alerté.",
+    waitingSteps: ["Continuez à rincer avec la solution de rinçage oculaire (article n°11) , n'arrêtez pas avant 15 minutes complètes.", "Dites à la personne de ne pas frotter l'œil en aucune circonstance.", "Après le rinçage, couvrez doucement l'œil avec une compresse oculaire stérile (article n°12) , n'appuyez pas fort.", "Demandez à la personne de garder les deux yeux fermés et immobiles , bouger un œil bouge l'autre.", "Rassurez-la calmement , dites-lui que l'œil est protégé et que les secours arrivent.", "Gardez l'œil couvert et immobile , les secours sont déjà en route."] },
+   l3: { label: "Grave", desc: "Éclaboussure chimique ou acide, objet incrusté, œil perforé, ou changement soudain de vision", autoAction: "emergency",
+    steps: ["En cas d'éclaboussure chimique : rincez avec la solution oculaire (article n°11) IMMÉDIATEMENT et continuellement pendant 15 minutes , n'arrêtez pas.","NE retirez PAS d'objet incrusté dans l'œil.","Couvrez doucement les deux yeux avec des compresses oculaires stériles (article n°12) pour réduire les mouvements.","Les services d'urgence sont contactés maintenant.","Gardez la personne calme et immobile , la vision est sérieusement en danger."],
+    speak: "Blessure oculaire grave. Rincez immédiatement et continuellement pendant 15 minutes en cas de produit chimique. Ne retirez pas les objets incrustés. Couvrez les deux yeux. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["En cas d'éclaboussure chimique : continuez à rincer avec la solution oculaire (article n°11) pendant tout le temps jusqu'à l'arrivée des secours , n'arrêtez pas.", "N'essayez PAS de retirer un objet incrusté dans ou à travers l'œil.", "Couvrez LES DEUX yeux doucement avec des compresses oculaires stériles (article n°12) , couvrir les deux réduit le mouvement de l'œil blessé.", "Dites à la personne de ne pas bouger les yeux d'un côté à l'autre.", "NE frottez PAS l'œil en aucune circonstance.", "Gardez la personne calme et immobile , les mouvements brusques peuvent aggraver les blessures oculaires.", "Dites au personnel médical exactement quelle substance est entrée dans l'œil et quand."],
+    waitingSpeak: "Les secours ont été contactés. En cas de produit chimique, continuez à rincer sans arrêt. Ne retirez aucun objet incrusté. Couvrez les deux yeux. Dites à la personne de ne pas bouger les yeux. Gardez-la calme et immobile." }
+  },
+  nosebleed: {
+   question: "Quelle est la gravité du saignement de nez ?",
+   l1: { label: "Léger", desc: "Saignement lent et gérable , pas de blessure ni de choc impliqué", autoAction: null,
+    steps: ["Asseyez-vous droit , n'inclinez PAS la tête en arrière.","Pincez fermement la partie molle du nez pendant 10 minutes sans relâcher.","Respirez par la bouche en pinçant.","Appliquez un pack froid (article n°6) enveloppé dans un tissu sur l'arête du nez.","Après 10 minutes, relâchez lentement. Si ça saigne encore, pincez encore 10 minutes."],
+    speak: "Pour un saignement de nez léger, asseyez-vous droit, pincez la partie molle du nez pendant 10 minutes sans relâcher, et appliquez le pack froid sur l'arête du nez." },
+   l2: { label: "Modéré", desc: "Le saignement ne s'arrête pas après 20 minutes, ou saignement de nez après un choc à la tête", autoAction: "faculty",
+    steps: ["Continuez à pincer le nez , n'arrêtez pas la pression.","Gardez la personne droite et calme.","NE bourrez PAS le nez avec quoi que ce soit.","L'infirmerie/l'assistant médical a été alerté , si cela a suivi un choc à la tête, une commotion doit être écartée.","Si la personne se sent faible, allongez-la en gardant la tête légèrement surélevée."],
+    speak: "Saignement de nez modéré. Continuez à appliquer une pression. L'infirmerie/l'assistant médical a été alerté. Si cela a suivi un choc à la tête, un contrôle de commotion est nécessaire.",
+    waitingSteps: ["Gardez la personne assise bien droite , n'inclinez pas la tête en arrière.", "Continuez à pincer fermement la partie molle du nez , réglez une minuterie et ne relâchez pas pendant 10 minutes.", "Appliquez le pack froid (article n°6) sur l'arête du nez pour aider à ralentir le saignement.", "Si cela est arrivé après un choc à la tête, surveillez la confusion, les vertiges, ou des pupilles inégales , ce sont des signes de commotion.", "Rassurez la personne calmement , dites-lui que vous maintenez la pression et que les secours arrivent.", "Continuez à appliquer la pression , les secours sont déjà en route."] },
+   l3: { label: "Grave", desc: "Saignement très abondant, sang coulant dans la gorge, ou personne faible ou perdant connaissance", autoAction: "emergency",
+    steps: ["Gardez la personne assise bien droite si consciente , le sang coulant dans la gorge peut causer l'étouffement.","Si inconsciente, placez-la sur le côté.","N'inclinez PAS la tête en arrière.","Les services d'urgence sont contactés maintenant.","Restez avec la personne et gardez-la calme."],
+    speak: "Saignement de nez grave. Gardez la personne droite. N'inclinez pas la tête en arrière. Les services d'urgence sont contactés maintenant.",
+    waitingSteps: ["Gardez la personne assise bien droite en permanence , le sang coulant dans la gorge peut causer l'étouffement ou des vomissements.", "Continuez à pincer le nez si la personne est consciente et coopérative.", "Si le sang coule dans la gorge et qu'elle a des haut-le-cœur, laissez-la le cracher , ne l'avalez pas.", "NE bourrez PAS les narines avec des mouchoirs ou du coton , cela peut causer plus de dommages en le retirant.", "Si la personne devient faible ou perd connaissance, placez-la doucement sur le côté.", "Gardez-la calme , l'anxiété augmente la tension artérielle ce qui aggrave le saignement.", "Notez l'heure de début du saignement et informez le personnel médical."],
+    waitingSpeak: "Les secours ont été contactés. Gardez la personne droite. Continuez à pincer si possible. Si le sang coule dans la gorge, laissez-la le cracher. Ne bourrez pas les narines. Si elle s'évanouit, placez-la sur le côté." }
+  },
+  animalbite: {
+   question: "Quelle est la gravité de la morsure ?",
+   l1: { label: "Légère", desc: "Petite rupture de la peau, saignement minime, pas de plaie profonde", autoAction: null,
+    steps: ["Lavez la morsure abondamment à l'eau et au savon pendant 5 minutes ou plus.","Appliquez une lingette antiseptique (article n°5).","Couvrez avec un pansement stérile (article n°1).","Notez l'animal et l'heure de la morsure pour le suivi médical."],
+    speak: "Pour une morsure légère, lavez abondamment à l'eau et au savon pendant 5 minutes ou plus, appliquez une lingette antiseptique, et couvrez avec un pansement stérile. Notez l'animal et l'heure pour le suivi médical." },
+   l2: { label: "Modérée", desc: "Plaies perforantes plus profondes, saignement, ou morsure d'un animal inconnu ou errant", autoAction: "faculty",
+    steps: ["Mettez des gants (article n°9).","Lavez la plaie abondamment , ne frottez pas les plaies perforantes profondes.","Appliquez un antiseptique (article n°5), couvrez avec une gaze stérile (article n°3).","L'infirmerie/l'assistant médical a été alerté , surveillez le gonflement, la rougeur ou la fièvre au cours des 24 prochaines heures , cela nécessite une attention médicale."],
+    speak: "Pour une morsure modérée, mettez des gants, lavez la plaie abondamment sans frotter les plaies profondes, appliquez un antiseptique, et couvrez avec une gaze stérile. L'infirmerie/l'assistant médical a été alerté. Surveillez le gonflement, la rougeur ou la fièvre.",
+    waitingSteps: ["Gardez la plaie propre et couverte avec la gaze stérile , ne la retirez pas pour vérifier constamment.", "Surveillez attentivement le gonflement, la rougeur, la chaleur ou le pus autour de la morsure.", "Surveillez la fièvre, les frissons, ou si la personne se sent mal en général.", "Gardez la zone mordue élevée si possible pour réduire le gonflement.", "Notez exactement quand la morsure a eu lieu et quel animal l'a causée , cela compte pour l'évaluation du risque de rage.", "Rassurez la personne calmement , dites-lui que les secours arrivent."] },
+   l3: { label: "Grave", desc: "Saignement abondant, plaie profonde ou large, morsure au visage, au cou, ou aux mains, ou d'un animal sauvage ou inconnu", autoAction: "emergency",
+    steps: ["Mettez des gants (article n°9) immédiatement.","Contrôlez tout saignement abondant avec une pression ferme de gaze (article n°3).","N'essayez PAS de fermer une plaie profonde vous-même.","Les services d'urgence sont contactés maintenant , les morsures d'animaux nécessitent une évaluation du risque de rage dans une clinique quelle que soit la gravité."],
+    speak: "Morsure d'animal grave. Mettez des gants immédiatement. Contrôlez le saignement abondant avec une pression ferme de gaze. N'essayez pas de fermer la plaie vous-même. Les services d'urgence sont contactés maintenant , cela nécessite une évaluation du risque de rage dans une clinique.",
+    waitingSteps: ["Maintenez une pression ferme et continue sur la plaie avec la gaze , ne la retirez pas pour vérifier.", "N'essayez PAS de fermer ou de suturer la plaie vous-même.", "Gardez la personne immobile et calme , le mouvement peut relancer le saignement.", "Notez exactement quand la morsure a eu lieu et quel animal l'a causée , la clinique en aura besoin pour l'évaluation du risque de rage.", "N'appliquez aucun remède maison , seulement du tissu propre ou de la gaze.", "Rassurez-la et gardez-la au chaud , les secours sont déjà en route."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : maintenez une pression ferme sur la plaie avec la gaze. N'essayez pas de la fermer vous-même. Gardez la personne immobile et calme. Notez l'animal et l'heure de la morsure pour la clinique." }
+  },
+  choking: {
+   question: "Quelle est la gravité de l'étouffement ?",
+   l1: { label: "Léger , peut tousser ou parler", desc: "Toux, peut encore parler ou respirer", autoAction: null,
+    steps: ["Encouragez-la à continuer à tousser , c'est le corps qui se dégage naturellement.","Ne frappez pas son dos tant que la toux est efficace.","Restez calme et restez avec elle.","Si la toux ne dégage plus les voies ou qu'elle ne peut plus parler, passez immédiatement aux tapes fermes dans le dos."],
+    speak: "Si elle peut encore tousser ou parler, encouragez-la à continuer à tousser, c'est le corps qui se dégage naturellement. Ne frappez pas son dos tant que la toux est efficace. Restez calme et restez avec elle." },
+   l2: { label: "Modéré , toux faible", desc: "Toux faible, ne peut pas dégager complètement les voies respiratoires", autoAction: "faculty",
+    steps: ["Placez-vous derrière elle, penchez-la légèrement en avant.","Donnez 5 tapes fermes entre les omoplates avec le talon de votre main.","Si cela ne fonctionne pas, donnez 5 compressions abdominales , poing au-dessus du nombril, tractions vives vers l'intérieur et le haut.","L'infirmerie/l'assistant médical a été alerté , alternez 5 tapes dans le dos et 5 compressions abdominales jusqu'à ce que cela se dégage."],
+    speak: "Pour une toux faible qui ne dégage pas les voies respiratoires, placez-vous derrière elle, penchez-la en avant, et donnez 5 tapes fermes entre les omoplates. Si cela ne fonctionne pas, donnez 5 compressions abdominales. L'infirmerie/l'assistant médical a été alerté. Alternez jusqu'à ce que cela se dégage.",
+    waitingSteps: ["Continuez à alterner 5 tapes dans le dos et 5 compressions abdominales , n'arrêtez pas jusqu'à ce que l'objet se dégage ou qu'elle puisse respirer normalement.", "Vérifiez sa bouche pour un objet visible entre les séries , ne le retirez que si vous pouvez clairement le voir et l'atteindre.", "Restez calme et continuez à lui parler , la panique resserre encore plus les voies respiratoires.", "Si elle devient incapable de tousser, parler, ou respirer du tout, appuyez sur Urgence immédiatement.", "Si elle perd connaissance, allongez-la doucement au sol et commencez la RCP si vous êtes formé.", "Continuez à surveiller , les secours sont déjà en route."] },
+   l3: { label: "Grave , ne peut pas respirer ou inconsciente", desc: "Ne peut pas respirer, ne peut pas tousser, devient bleue, ou inconsciente", autoAction: "emergency",
+    steps: ["Appuyez sur URGENCE immédiatement.","Si elle devient inconsciente, allongez-la doucement au sol et commencez les compressions thoraciques de RCP si vous êtes formé.","Vérifiez la bouche pour un objet visible avant chaque insufflation, mais ne balayez jamais à l'aveugle avec le doigt.","Continuez la RCP jusqu'à l'arrivée des secours ou jusqu'à ce qu'elle recommence à respirer."],
+    speak: "Étouffement grave. Appuyez sur Urgence immédiatement. Si elle devient inconsciente, allongez-la doucement au sol et commencez la RCP si vous êtes formé. Vérifiez la bouche pour un objet visible avant chaque insufflation, mais ne balayez jamais à l'aveugle avec le doigt.",
+    waitingSteps: ["Si elle est inconsciente, continuez la RCP , 30 compressions thoraciques, 2 insufflations, répétez.", "Vérifiez brièvement la bouche avant chaque insufflation , ne retirez qu'un objet que vous pouvez clairement voir, jamais à l'aveugle.", "Si elle commence à tousser, respirer, ou bouger, arrêtez la RCP et placez-la en position latérale de sécurité.", "NE donnez RIEN par la bouche , ni eau, ni nourriture.", "NE la laissez PAS seule , quelqu'un doit rester avec elle en permanence.", "Notez exactement quand l'étouffement a commencé , informez le personnel médical à leur arrivée."],
+    waitingSpeak: "Les secours ont été contactés. En attendant : si elle est inconsciente, continuez la RCP. Vérifiez brièvement la bouche avant chaque insufflation, jamais à l'aveugle. Si elle recommence à respirer, placez-la sur le côté. Ne la laissez pas seule." }
+  }
+ }
 };
+
 TRIAGE.rw = {
  question: "Bite bikaze bingana iki ?",
  levels: { l1: "Byoroheje", l2: "Bigifite ingaruka", l3: "Bikaze , Ubutabazi" },
- situations: Object.fromEntries(Object.entries(TRIAGE.en.situations).map(([key, s]) => [key, {
-  question: TRIAGE.en.situations[key].question,
-  l1: { ...s.l1 }, l2: { ...s.l2 }, l3: { ...s.l3 }
- }]))
+ situations: {
+  bleeding: {
+   question: "Amaraso avuye bingana iki ?",
+   l1: { label: "Byoroheje", desc: "Igikomere gito, amaraso ari make kandi agenda gahoro", autoAction: null,
+    steps: ["Ambara inzuzo (igikoresho #9).","Sukura buhoro impande z'igikomere ukoresheje umuti wica mikorobe (igikoresho #5).","Kanda gaze isukuye (igikoresho #3) neza ku gikomere.","Komeza ukande iminota 5 udasuzuma.","Pfundikiza na bandage (igikoresho #1) ihuye n'ingano y'igikomere."],
+    speak: "Ku gikomere gito, ambara inzuzo, ukande gaze isukuye neza mu minota 5, hanyuma usukure ukoresheje umuti wica mikorobe, upfundikize na bandage." },
+   l2: { label: "Bigifite ingaruka", desc: "Igikomere kirakomeye, amaraso ntahagarara nyuma y'iminota mike, cyangwa kuva amaraso menshi", autoAction: "faculty",
+    steps: ["Ambara inzuzo (igikoresho #9) ako kanya.","Niba imyenda ipfundikiye igikomere, koresha ingorogoro (igikoresho #10) uyice , ntukurure imyenda ku gikomere.","Kanda gaze isukuye (igikoresho #3) neza , ntusuzume.","Niba amaraso yambutse, ongeraho indi gaze hejuru , NTUKURE iya mbere.","Zamura agace kakomeretse hejuru y'umutima niba bishoboka.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , komera umutima ukomeze gukanda ku gikomere."],
+    speak: "Ku maraso yinshi, ambara inzuzo, ukande gaze neza ntuyisuzume. Niba amaraso yambutse, ongeraho indi hejuru. Zamura agace. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe.",
+    waitingSteps: ["Komeza ukande gaze neza , ntuyikure kugira ngo usuzume igikomere.", "Niba amaraso yambutse, ongeraho indi gaze hejuru , ntukure iya mbere.", "Zamura ukuboko cyangwa ukuguru gukomeretse hejuru y'umutima.", "Fasha umuntu kwicara cyangwa kuryama , ntagomba guhagarara.", "Muvugishe amahoro , mubwire ko ubutabazi buje kandi ari mwiza.", "Komeza kureba , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Amaraso menshi adacecekera, igikomere ku mutwe, igikomere kirekire, cyangwa umutsi ushobora kuba warakomeretse", autoAction: "emergency",
+    steps: ["Niba imyenda ipfundikiye igikomere, koresha ingorogoro (igikoresho #10) uyice ako kanya , ntukurure ku gikomere.","Kanda CYANE ku gikomere ukoresheje icyo ubona cyose , umwenda, gaze, intoki zawe.","NTUKURE ikintu wapfundikije. Ongeraho ikindi hejuru niba cyuzuye amaraso.","Komeza gukanda neza udahwema , ntuhagarike.","Ubutabazi bwahamagawe ubu.","Guma hafi y'umuntu. Muvugishe amahoro. Ntumunyeganyeze keretse ari mu kaga."],
+    speak: "Amaraso menshi. Kanda cyane ku gikomere ntukure icyo wapfundikije. Ongeraho ikindi hejuru niba bikenewe. Komeza gukanda neza. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["Komeza gukanda CYANE , ntureke gukanda kubera impamvu iyo ariyo yose kugeza ubutabazi bugeze.", "Niba amaraso yambutse, ongeraho umwenda cyangwa gaze hejuru , ntukure na rimwe ibyari bisanzwe ku gikomere.", "Zamura ukuguru cyangwa ukuboko gukomeretse hejuru y'umutima niba bishoboka.", "Reka umuntu aryame , ntumuriha guhagarara cyangwa kugenda.", "Muvugishe amahoro , mumufashe kuguma yumva neza kandi aruhutse.", "Ntumuhe amazi cyangwa ibyokurya , hari ubwo azakenera kubagwa."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: komeza gukanda cyane ku gikomere. Ntukure umwenda. Ongeraho ikindi hejuru niba bikenewe. Zamura agace. Reka umuntu aryame. Muvugishe amahoro kandi ntumuhe ibyokurya cyangwa amazi." }
+  },
+  burn: {
+   question: "Inkongi ikaze bingana iki ?",
+   l1: { label: "Yoroheje", desc: "Agace gato, uruhu rutukura, nta birurumba", autoAction: null,
+    steps: ["Siga amazi akonje ku gushya nibura mu minota 10.","NTUKORESHE urubura, amavuta, cyangwa dawa y'amenyo.","Pfundikiza buhoro na gaze isukuye ntahobera (igikoresho #4).","Ntukomeshe ibirurumba bizahaguruka.","Niba ni agace gato kandi umuntu yumva neza, umuti w'ibibabaza (igikoresho #7) urashobora gutangwa niba byemewe mu kigo cyawe , NTUTANGE ku gushya kunini cyangwa gukaze."],
+    speak: "Ku gushya gato, siga amazi akonje nibura mu minota 10. Ntukoreshe urubura. Pfundikiza buhoro na gaze ntahobera. Ntukomeshe ibirurumba." },
+   l2: { label: "Bigifite ingaruka", desc: "Ibirurumba, agace kanini kagizweho ingaruka, cyangwa gushya mu maso, mu ntoki, cyangwa ku ngingo", autoAction: "faculty",
+    steps: ["Siga amazi akonje ku gushya nibura mu minota 15.","Niba imyenda ITAPFUNDITSE ku gushya, koresha ingorogoro (igikoresho #10) uyice buhoro , ntukurure ku gushya.","NTUKURE imyenda ipfundikiye ku gushya.","Pfundikiza buhoro na gaze isukuye ntahobera (igikoresho #4) , ntupfundikize cyane.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , ibi bisaba isuzuma ry'ubuvuzi.","Gumana umuntu atuje kandi adakoze."],
+    speak: "Ku gushya kwinshi, siga amazi akonje mu minota 15. Ntukure imyenda ipfundikiye. Pfundikiza buhoro na gaze ntahobera. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe.",
+    waitingSteps: ["Komeza gusiga amazi akonje ku gushya , shyiraho igihe cy'iminota 15 kandi ntuhagarike hakiri kare.", "Ntukure imyenda ipfundikiye ku gushya , reka bikorwe n'abaganga.", "Ntushyireho ikintu kiyo ku gushya , nta rubura, amavuta, cyangwa ikirimo.", "Nyuma yo gusukura, pfundikiza buhoro na gaze isukuye ntahobera (igikoresho #4) , ntupfundikize cyane.", "Muhumurize amahoro , mubwire ko ubutabazi buje.", "Komeza kureba , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Agace kanini, uruhu rwatwitse cyangwa rwera, gushya kwa kimiti cyangwa amashanyarazi, cyangwa gushya hafi y'amaso cyangwa ubuhumekero", autoAction: "emergency",
+    steps: ["Siga amazi akonje ku gushya nibura mu minota 20 , ibi bikorwa ku gushya kose harimo n'ukunini cyangwa gukaze. NTUKORESHE urubura cyangwa amazi akonje cyane.","NTUKORE ku gace gashyushye.","Gumana umuntu adakoze kandi atuje uko bishoboka.","Niba ni gushya kwa kimiti ku ruhu: koresha ingorogoro (igikoresho #10) buhoro kugira ngo ukure imyenda itapfunditse , ntukurure , hanyuma usukure ako kanya n'amazi.","Ubutabazi bwahamagawe ubu."],
+    speak: "Gushya gukaze. Ntukore ku gace gashyushye. Gumana umuntu adakoze. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["NTUKORE, ntukoze, cyangwa ngo upfundikize agace gashyushye n'ikintu kifata cyangwa gifite ubwoya.", "NTUSHYIREHO urubura, amavuta, dawa y'amenyo, cyangwa umuti wo mu rugo.", "Ntukure imyenda ipfundikiye ku gushya , reka bikorwe n'abaganga.", "Gumana umuntu adakoze kandi atuje uko bishoboka.", "NTUMUHE ibyokurya cyangwa amazi mu kanwa , hari ubwo azakenera kubagwa yaraye asinziriye.", "Niba hari umwotsi mu gace, jyana umuntu ahantu hafite umwuka mwiza niba bishoboka."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: ntukore ku gace gashyushye. Ntushyireho ikintu icyo aricyo cyose. Ntukure imyenda ipfundikiye. Gumana umuntu adakoze. Muhe amazi make niba yumva neza." }
+  },
+  headache: {
+   question: "Umutwe uribwa bingana iki ?",
+   l1: { label: "Byoroheje", desc: "Umutwe uribwa buhoro, umuntu ari maso kandi arakora", autoAction: null,
+    steps: ["Jya ahantu hatuje, hakonje, kandi hijimye.","Nywa amazi buhoro , gutakaza amazi ni impamvu ikunze kuboneka.","Niba byemewe, fata umuti w'ibibabaza (igikoresho #7) nk'uko byanditswe.","Ruhuka iminota 15 kugeza 20.","Niba umutwe urushaho kuribwa cyangwa hari isesemi, kanda Ubufasha."],
+    speak: "Ku mutwe uribwa buhoro, jya ahantu hatuje kandi hakonje, unywe amazi, hanyuma uruhuke. Fata umuti w'ibibabaza niba byemewe. Niba birushaho, kanda ubufasha." },
+   l2: { label: "Bigifite ingaruka", desc: "Bikomeza, birushaho kuba bibi, cyangwa biherekejwe n'isesemi, guta imitwe, cyangwa kwikangwa n'urumuri", autoAction: "faculty",
+    steps: ["Fasha umuntu kwicara cyangwa kuryama ahantu hatuje kandi hakonje.","Kuura ikintu cyose cyifashe ku ijosi cyangwa ku mutwe.","Muhe amazi niba adafite isesemi.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , komeza kumureba kugeza ubutabazi bugeze.","Ntumusige wenyine."],
+    speak: "Ku mutwe uribwa n'isesemi cyangwa guta imitwe, fasha umuntu kuruhuka ahantu hakonje, kuura imyenda yifashe, hanyuma umuhe amazi. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe.",
+    waitingSteps: ["Fasha umuntu kuryama ahantu hatuje, hakonje, kandi hijimye gato.", "Kuura ikintu cyose cyifashe ku ijosi, ku ikoraniro, cyangwa ku gatuza.", "Muhe amazi make , ntumunyage kunywa.", "Ntumuhe umuti utari uwo wandikiwe uyu muntu.", "Guma hafi ye kandi uvuge buhoro , mumuhumurize ko ubutabazi buje.", "Komeza kureba , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Byatunguranye, bikaze , bisobanurwa nk'umutwe ubabaza kurusha ibindi byose mu buzima bwe, cyangwa biherekejwe no kutumva neza, guhindura kureba, cyangwa intege nke", autoAction: "emergency",
+    steps: ["Gumana umuntu adakoze , ntumunyeganyeze ku busa.","Ntumuhe umuti uwo ariwo wose.","Niba atakaje ubwenge, mushyire mu buryo bwo kuryama ku ruhande.","Ubutabazi bwahamagawe ubu.","Guma hafi ye uvuge amahoro."],
+    speak: "Umutwe ubabaza cyane mu buryo butunguranye. Gumana umuntu adakoze, ntumuhe umuti. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["Gumana umuntu adakoze rwose , ntumunyeganyeze keretse ari mu kaga gakomeye.", "NTUMUHE umuti uwo ariwo wose w'ibibabaza , urashobora guhisha ibimenyetso abaganga bakeneye kubona.", "Zimya urumuri kandi ugabanye urusaku niba bishoboka , urumuri n'urusaku birushaho kubabaza uyu mutwe.", "Niba aruka, muhindukize buhoro ku ruhande kugira ngo yirinde kuniga.", "Niba atangiye kutumva neza cyangwa agatakaza ubwenge, genzura ko ahumeka hanyuma umushyire mu buryo bwo kuryama ku ruhande.", "Guma hafi ye kandi wandike igihe umutwe watangiriye , bibwire abaganga."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: gumana umuntu adakoze. Ntumuhe umuti. Zimya urumuri kandi ugabanye urusaku. Niba aruka, muhindukize buhoro ku ruhande. Guma hafi ye kandi wandike igihe byatangiriye." }
+  },
+  fainting: {
+   question: "Umuntu ari mu bihe ?",
+   l1: { label: "Yagarutse vuba", desc: "Umuntu yagarutse mu bwenge mu munota umwe kandi yumva neza", autoAction: null,
+    steps: ["Mutaragure hasi ku mugongo.","Zamura amaguru ye cm 30 hejuru y'umutima.","Kuura ikintu cyose cyifashe ku ijosi cyangwa ku gatuza.","Muhe amazi make igihe yumva neza rwose.","Mureberere iminota 15 mbere yo kumureka guhagarara."],
+    speak: "Umuntu yagarutse mu bwenge. Mutaragure, uzamure amaguru ye gato, ukuure imyenda yifashe, hanyuma umuhe amazi make igihe yumva neza." },
+   l2: { label: "Agaruka buhoro", desc: "Yatakaje ubwenge, ntiyumva neza, agaruka buhoro, cyangwa yaraduse ata mpamvu igaragara", autoAction: "faculty",
+    steps: ["Mutaragure , ntumwicaze ako kanya.","Kuura imyenda yifashe ku ijosi n'igituza.","Genzura ko ahumeka neza.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , guma hafi ye kugeza ubutabazi bugeze.","Niba ahagarika guhumeka cyangwa ataba akikanga, kanda Itangazo ako kanya."],
+    speak: "Umuntu agaruka buhoro. Mutaragure, ukuure imyenda yifashe, hanyuma ugenzure ko ahumeka. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe.",
+    waitingSteps: ["Reka umuntu aryame hasi , ntumwicaze ako kanya.", "Kuura imyenda yifashe ku ijosi, igituza, n'ukiziba.", "Genzura ko ahumeka buri masegonda 30 , reba, umva, umve.", "Niba yumva neza rwose, muhe amazi make umufashe kwicara buhoro buhoro.", "Guma hafi ye uvuge amahoro , mubwire aho ari n'uko ubutabazi buje.", "Niba ahagarika guhumeka kandi ufite ubumenyi, tangira RCP , ubutabazi buri mu nzira."] },
+   l3: { label: "Atakaje ubwenge / ntiyitaba", desc: "Umuntu ntiyumva neza, ntiyitaba, cyangwa ntahumeka neza", autoAction: "emergency",
+    steps: ["Genzura ko ahumeka , reba, umva, umve mu masegonda 10.","Niba adahumeka: tangira RCP niba ufite ubumenyi.","Niba ahumeka: mushyire mu buryo bwo kuryama ku ruhande , muzunguze buhoro ku ruhande, genzura akanwa niba hari ibyo yarutse cyangwa bimubuza guhumeka ubikure niba ubibona, hanyuma uzamure umutwe gato inyuma kugira ngo ahumeke neza.","Ntumuhe ikintu icyo aricyo cyose mu kanwa.","Ubutabazi bwahamagawe ubu. Guma hafi ye."],
+    speak: "Umuntu ntiyumva neza. Genzura ko ahumeka. Niba ufite ubumenyi, tangira RCP. Niba ahumeka, mushyire ku ruhande mu buryo bwo kuryama. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["Genzura ko ahumeka buri masegonda 30 , reba, umva, umve.", "Niba ahumeka: mukomeze kuguma mu buryo bwo kuryama ku ruhande (umutwe uzamuritse gato inyuma) , ibi birinda kuniga niba aruka.", "Niba adahumeka kandi ufite ubumenyi: tangira RCP , ukande igituza inshuro 30, uhe impumuro 2, subiramo.", "NTUMUHE ikintu icyo aricyo cyose mu kanwa , nta mazi, nta byokurya, nta muti.", "NTUMUSIGE WENYINE , hagomba kuguma umuntu we bose igihe cyose.", "Kuura imyenda yifashe ku ijosi, igituza, n'ukiziba.", "Andika niba yagize ikimenyetso cyo kunyeganyega , bibwire abaganga bagezeyo."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: komeza kugenzura ko ahumeka. Niba ahumeka, mukomeze ku ruhande. Niba adahumeka kandi ufite ubumenyi, tangira RCP. Ntumuhe ikintu mu kanwa. Ntumusige wenyine." }
+  },
+  allergic: {
+   question: "Indwara y'aleriji ikaze bingana iki ?",
+   l1: { label: "Yoroheje", desc: "Uduheri ku ruhu, ibibyimba, cyangwa kuribwa gato gusa , nta kubyimba, nta ngorane zo guhumeka", autoAction: null,
+    steps: ["Vana umuntu ku kintu cyamuteye iyi ndwara niba bishoboka.","Koresha umuti w'aleriji (igikoresho #8) nk'uko byanditswe , gusa niba byemewe mu kigo cyawe.","Mureberere iminota 30 kureba niba birushaho kuba bibi.","Niba hari ikibyimba kigaragara, kanda Ubufasha ako kanya.","Gumana umuntu atuje yicaye."],
+    speak: "Ku ndwara y'aleriji yoroheje ifite gusa uduheri ku ruhu, tanga umuti w'aleriji niba byemewe hanyuma umureberere iminota 30. Niba hari ikibyimba kigaragara, kanda ubufasha ako kanya." },
+   l2: { label: "Bigifite ingaruka", desc: "Kubyimba gutangiye, uduheri twaguye hose, umuntu yikanze cyangwa afite ubwoba", autoAction: "faculty",
+    steps: ["Gumana umuntu yicaye kandi atuje.","Niba umuti w'aleriji wemewe, muhe ubu (igikoresho #8).","NTUMUHE ikindi icyo aricyo cyose mu kanwa.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , genzura kubyimba mu maso, ku minwa, cyangwa ku muhogo.","Niba guhumeka bikomera, kanda Itangazo ako kanya."],
+    speak: "Indwara y'aleriji igifite ingaruka. Tanga umuti w'aleriji niba wemewe. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe. Genzura kubyimba mu muhogo , niba guhumeka byahindutse, kanda itangazo ubu.",
+    waitingSteps: ["Tanga umuti w'aleriji (igikoresho #8) niba wemewe mu kigo cyawe , kurikiza uko byanditswe.", "Gumana umuntu yicaye kandi atuje , ntumureke agenda.", "Genzura neza mu maso, ku minwa, no ku muhogo niba hari ikibyimba.", "Genzura impinduka mu guhumeka , umva niba hari urusaku cyangwa ijwi ryihariye.", "Muhumurize amahoro umubwire ko ubutabazi buje.", "Ubutabazi buri mu nzira , komeza kureba uko ahumeka."] },
+   l3: { label: "Bikaze , Anaphylaxis", desc: "Kubyimba mu maso, ku minwa, cyangwa ku muhogo , ingorane zo guhumeka, urusaku mu guhumeka, cyangwa kuraduka", autoAction: "emergency",
+    steps: ["Ubutabazi bwahamagawe ubu , iki ni anaphylaxis.","Niba umuntu afite EpiPen, mufashe kuyikoresha ako kanya ku kibero cy'inyuma.","Niba akiri maso kandi ahumeka neza: mutaragure hejuru y'amaguru azamuritse hejuru y'umutima. Niba guhumeka bikomeye: mumufashe kuguma yicaye. Niba atakaje ubwenge cyangwa aruka: NTUMUTARAGURE , muryamishe buhoro ku ruhande.","Ntumuhe ikintu mu kanwa.","Niba ahagarika guhumeka, tangira RCP niba ufite ubumenyi."],
+    speak: "Anaphylaxis. Ubutabazi bwahamagawe ubu. Fasha gukoresha EpiPen niba iriho. Mutaragure amaguru azamuritse keretse guhumeka bikomeye.",
+    waitingSteps: ["Niba umuntu afite EpiPen: mufashe kuyitera ku kibero cy'inyuma , binyuze mu myenda birakwiye.", "Niba akiri maso kandi ahumeka neza: mutaragure amaguru azamuritse hejuru y'umutima. Niba guhumeka bikomeye: mumufashe kuguma yicaye. Niba atakaje ubwenge cyangwa aruka: NTUMUTARAGURE , muryamishe buhoro ku ruhande.", "NTUMUHE imiti y'aleriji , irakabije gukererwa kuri anaphylaxis.", "Ntumuhe ikintu mu kanwa.", "Indi doze ya EpiPen irashobora gutangwa nyuma y'iminota 5 kugeza 15 niba ibimenyetso bigarutse cyangwa bitagabanutse.", "Guma hafi ye , anaphylaxis irashobora kurushaho kuba mbi vuba naho byari byaratangiye kuba byiza."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Niba EpiPen iriho, koresha ubu ku kibero cy'inyuma. Niba guhumeka bikomeye, mumufashe kuguma yicaye. Ukundi mutaragure amaguru azamuritse. Ntumuhe ikintu mu kanwa. Guma hafi ye." }
+  },
+  sprain: {
+   question: "Ibikomere bikaze bingana iki ?",
+   l1: { label: "Byoroheje", desc: "Kubabara n'kubyimba byoroheje, umuntu arashobora gushingira gato", autoAction: null,
+    steps: ["Ruhuza ako gace ako kanya , hagarika gukoresha ako kanya.","Shyiraho ikintu gikonje (igikoresho #6), gipfundikiye mu kitenge, mu minota 15.","Pfundikiza na bandage ielastike (igikoresho #2) gufasha kubyimba , ntupfundikize cyane.","Zamura agace hejuru y'umutima niba bishoboka.","Niba kubabara byiyongera cyangwa adashobora gushingira, kanda Ubufasha."],
+    speak: "Ku bikomere byoroheje, ruhuza agace, ushyireho ikintu gikonje gipfundikiye mu kitenge mu minota 15, upfundikize na bandage ielastike, hanyuma uzamure niba bishoboka." },
+   l2: { label: "Bigifite ingaruka", desc: "Kubyimba gukomeye, kuribwa, cyangwa umuntu ntashobora gushingira na gato", autoAction: "faculty",
+    steps: ["Gumana umuntu adakoze rwose , ntagerageze kugenda.","Shyiraho ikintu gikonje (igikoresho #6), gipfundikiye mu kitenge, mu minota 15.","NTUGERAGEZE gukiranura cyangwa gukoraho ingingo.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , umuntu ashobora gukenera x-ray kugira ngo hamenyekane niba nta gufa kwamenetse.","Mugumane atuje kandi azamuritse."],
+    speak: "Ibikomere bigifite ingaruka cyangwa gufa kwamenetse bishoboka. Gumana umuntu adakoze. Shyiraho ikintu gikonje. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , ashobora gukenera x-ray.",
+    waitingSteps: ["Gumana umuntu adakoze rwose , ntumushishikarize kugenda cyangwa kuzunguza agace kakomeretse.", "Shyiraho ikintu gikonje (igikoresho #6) gipfundikiye mu kitenge mu minota 15 , ntushyire urubura ku ruhu ako kanya.", "Ntugerageze gukiranura cyangwa gukosora ingingo cyangwa agace mu buryo ubwo aribwo bwose.", "Zamura buhoro agace kakomeretse hejuru y'umutima niba nta kubabara birenze bibaho.", "Muhumurize amahoro , mubwire ko utegereje ubutabazi kandi ari umutekano.", "Komeza kureba no guhumuriza , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Igufa rigaragara ko ryahindutse, ingingo yavuye ahantu rwose, cyangwa kubabara gukomeye kudashobora kunyeganyega", autoAction: "emergency",
+    steps: ["NTUGERAGEZE kwimura cyangwa gusubiza ingingo cyangwa igufa ahantu hayo.","Fatisha agace nk'uko wagasanze.","Shyiraho ikintu gikonje (igikoresho #6) buhoro hafi , ntukishyire ku gace kahindutse.","Ubutabazi bwahamagawe ubu.","Gumana umuntu adakoze kandi atuje kugeza ubutabazi bugeze."],
+    speak: "Gufa kwamenetse cyangwa ingingo yavuye ahantu bishoboka. Ntugerageze kwimura ingingo. Fatisha nk'uko wayisanze. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["NTUGERAGEZE gukiranura, gusubiza, cyangwa gushyira igufa cyangwa ingingo ahantu hayo , ibi ni akazi k'abaganga gusa.", "Fatisha agace nk'uko wagasanze neza , koresha itawuli yizingiye, umwenda, cyangwa ikindi kintu icyo aricyo cyose gufasha gato utagasunika.", "NTUKURE inkweto cyangwa imyenda ku gace kakomeretse , kubyimba birashobora kubigora nyuma kandi abaganga bagomba kubikora neza.", "Shyiraho ikintu gikonje (igikoresho #6) HAFI y'igikomere, ntugishyire ku gace kahindutse rwose.", "Gumana umuntu adakoze kandi aryamye niba bishoboka.", "NTUMUHE ibyokurya cyangwa amazi , hari ubwo azakenera kubagwa yaraye asinziriye.", "Muhumurize kandi umushyushye , guhagarika umutima ni akaga gakomeye igihe hari amagufa amenetse."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: ntukimure igufa cyangwa ingingo. Yifashe nk'uko wayisanze. Shyiraho ikintu gikonje hafi. Gumana umuntu adakoze. Ntumuhe ibyokurya cyangwa amazi. Mushyushye kandi umuhumurize." }
+  },
+  eyeinjury: {
+   question: "Ni ingorane iyihe y'ijisho ?",
+   l1: { label: "Yoroheje", desc: "Umukungugu, agace gato, cyangwa kunyerera gato gusa", autoAction: null,
+    steps: ["NTUKERE ijisho.","Koresha umuti w'ijisho (igikoresho #11) usukure buhoro mu minota 10.","Fungura ijisho buhoro reka amazi anyure uva mu ruhande rwo hagati kugera hanze , NTUKANYE cyane cyangwa ngo ukande urugingo rw'ijisho, ibi birashobora gukomeretsa ijisho.","Pfundikiza n'itambaro ry'ijisho isukuye (igikoresho #12) niba kunyerera bikomeje.","Niba agace kakiriho cyangwa kutumva neza bikomeje, kanda Ubufasha."],
+    speak: "Ku kunyerera k'ijisho gato, ntukere ijisho. Sukura buhoro n'umuti w'ijisho mu minota 10. Pfundikiza n'itambaro ry'ijisho isukuye niba kunyerera bikomeje." },
+   l2: { label: "Bigifite ingaruka", desc: "Kumva nk'ikizinga nyuma yo gusukura, gutukura gukomeje, cyangwa agace gato kagaragara ku ijisho", autoAction: "faculty",
+    steps: ["NTUGERAGEZE gukura ikintu icyo aricyo cyose ku ijisho.","Komeza gusukura n'umuti w'ijisho (igikoresho #11) mu minota 15.","Pfundikiza buhoro n'itambaro ry'ijisho isukuye (igikoresho #12) , ntukande.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , ibi bisaba isuzuma ry'inzobere mu maso.","Bagira umuntu ntakore cyangwa ngo akore ijisho."],
+    speak: "Ingorane y'ijisho igifite ingaruka. Komeza gusukura n'umuti w'ijisho mu minota 15. Pfundikiza n'itambaro ry'ijisho isukuye. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe.",
+    waitingSteps: ["Komeza gusukura n'umuti w'ijisho (igikoresho #11) , ntuhagarike mbere y'uko iminota 15 irangira.", "Bwira umuntu ntakore ijisho mu buryo ubwo aribwo bwose.", "Nyuma yo gusukura, pfundikiza buhoro ijisho n'itambaro ry'ijisho isukuye (igikoresho #12) , ntukande cyane.", "Saba umuntu gufunga amaso yombi adakoze , kunyeganyeza ijisho rimwe binyeganyeza n'irindi.", "Muhumurize amahoro , mubwire ko ijisho ririndwa kandi ubutabazi buje.", "Gumana ijisho ripfundikiye kandi ridakoze , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Isasu rya kimiti cyangwa aside, ikintu cyinjiye mu jisho, ijisho ryafunguritse, cyangwa impinduka itunguranye mu kureba", autoAction: "emergency",
+    steps: ["Niba ari isasu rya kimiti: sukura n'umuti w'ijisho (igikoresho #11) AKO KANYA kandi udahwema mu minota 15 , ntuhagarike.","NTUKURE ikintu icyo aricyo cyose cyinjiye mu jisho.","Pfundikiza amaso yombi buhoro n'amatambaro y'ijisho asukuye (igikoresho #12) kugira ngo agabanye kunyeganyega.","Ubutabazi bwahamagawe ubu.","Gumana umuntu atuje kandi adakoze , kureba kuri mu kaga gakomeye."],
+    speak: "Ingorane y'ijisho ikaze. Sukura ako kanya kandi udahwema mu minota 15 niba ari kimiti. Ntukure ibintu byinjiye mu jisho. Pfundikiza amaso yombi. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["Niba ari isasu rya kimiti: komeza gusukura n'umuti w'ijisho (igikoresho #11) igihe cyose kugeza ubutabazi bugeze , ntuhagarike.", "NTUGERAGEZE gukura ikintu icyo aricyo cyose cyinjiye mu jisho.", "Pfundikiza AMASO YOMBI buhoro n'amatambaro y'ijisho asukuye (igikoresho #12) , gupfundikiza yombi bigabanya kunyeganyega ijisho rikomeretse.", "Bwira umuntu ntanyeganyeze amaso mu ruhande.", "NTUKERE ijisho mu buryo ubwo aribwo bwose.", "Gumana umuntu atuje kandi adakoze , kunyeganyega bitunguranye birashobora kurushaho kwangiza ijisho.", "Bwira abaganga neza icyo kintu cyinjiye mu jisho n'igihe."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Niba ari kimiti, komeza gusukura udahwema. Ntukure ikintu cyinjiye mu jisho. Pfundikiza amaso yombi. Bwira umuntu ntanyeganyeze amaso. Mugumane atuje kandi adakoze." }
+  },
+  nosebleed: {
+   question: "Amaraso y'amazuru akaze bingana iki ?",
+   l1: { label: "Byoroheje", desc: "Amaraso agenda gahoro kandi agenzurwa , nta gikomere cyangwa igikomere cyabayeho", autoAction: null,
+    steps: ["Icara neza , NTUGUNDE umutwe inyuma.","Kanda igice cyoroheje cy'amazuru neza mu minota 10 utarekura.","Humeka ukoresheje akanwa mu gihe ukanda.","Shyiraho ikintu gikonje (igikoresho #6) gipfundikiye mu kitenge ku mazuru.","Nyuma y'iminota 10, rekura buhoro. Niba akiva, kanda indi minota 10."],
+    speak: "Ku maraso y'amazuru mato, icara neza, ukande igice cyoroheje cy'amazuru mu minota 10 utarekura, hanyuma ushyireho ikintu gikonje ku mazuru." },
+   l2: { label: "Bigifite ingaruka", desc: "Amaraso ntahagarara nyuma y'iminota 20, cyangwa amazuru avuye nyuma yo gukubitwa ku mutwe", autoAction: "faculty",
+    steps: ["Komeza gukanda amazuru , ntuhagarike gukanda.","Gumana umuntu ahagaze neza kandi atuje.","NTUZUZE amazuru n'ikintu icyo aricyo cyose.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , niba ibi byakurikiye igikomere ku mutwe, hagomba kwirindwa concussion.","Niba umuntu yumva ashaka kuraduka, mutaragure agumane umutwe uzamuritse gato."],
+    speak: "Amaraso y'amazuru agifite ingaruka. Komeza gukanda. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe. Niba byakurikiye igikomere ku mutwe, isuzuma rya concussion rirakenewe.",
+    waitingSteps: ["Gumana umuntu yicaye neza , ntugunde umutwe inyuma.", "Komeza gukanda igice cyoroheje cy'amazuru neza , shyiraho igihe kandi ntureke mu minota 10.", "Shyiraho ikintu gikonje (igikoresho #6) ku mazuru kugira ngo bifashe kugabanya amaraso.", "Niba ibi byakurikiye igikomere ku mutwe, genzura kutumva neza, guta imitwe, cyangwa amaso adasa , ibi ni ibimenyetso bya concussion.", "Muhumurize amahoro , mubwire ko ukomeje gukanda kandi ubutabazi buje.", "Komeza gukanda , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze", desc: "Amaraso menshi cyane, amaraso ajya mu muhogo, cyangwa umuntu yumva araduka cyangwa atakaza ubwenge", autoAction: "emergency",
+    steps: ["Gumana umuntu ahagaze neza niba akiri maso , amaraso ajya mu muhogo arashobora gutuma aniga.","Niba atakaje ubwenge, muryamishe ku ruhande.","NTUGUNDE umutwe inyuma.","Ubutabazi bwahamagawe ubu.","Guma hafi y'umuntu kandi umugumane atuje."],
+    speak: "Amaraso y'amazuru akaze. Gumana umuntu ahagaze neza. Ntugunde umutwe inyuma. Ubutabazi bwahamagawe ubu.",
+    waitingSteps: ["Gumana umuntu ahagaze neza igihe cyose , amaraso ajya mu muhogo arashobora gutuma aniga cyangwa aruka.", "Komeza gukanda amazuru niba umuntu akiri maso kandi yifuza gufashwa.", "Niba amaraso ajya mu muhogo kandi yumva ashaka kuruka, mureke abisohore , ntabimire.", "NTUZUZE amazuru n'ikinyabuziga cyangwa ipamba , birashobora kongera kwangiza igihe bikuwemo.", "Niba umuntu yumva araduka cyangwa atakaza ubwenge, muryamishe buhoro ku ruhande.", "Mugumane atuje , ubwoba burongera umuvuduko w'amaraso bikarushaho kubabaza.", "Andika igihe amaraso yatangiriye kandi ubibwire abaganga."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Gumana umuntu ahagaze neza. Komeza gukanda niba bishoboka. Niba amaraso ajya mu muhogo, mureke abisohore. Ntuzuze amazuru. Niba araduka, muryamishe ku ruhande." }
+  },
+  animalbite: {
+   question: "Kurumwa bikaze bingana iki ?",
+   l1: { label: "Byoroheje", desc: "Uruhu rwacikaguye gato, amaraso make, nta gikomere cyimbitse", autoAction: null,
+    steps: ["Karaba igikomere neza n'amazi n'isabune mu minota 5 cyangwa irenga.","Shyiraho umuti wica mikorobe (igikoresho #5).","Pfundikiza na bandage isukuye (igikoresho #1).","Andika inyamaswa n'igihe cyo kurumwa kugira ngo bifashe muganga."],
+    speak: "Ku kurumwa gato, karaba igikomere neza n'amazi n'isabune byibuze mu minota 5, ushyireho umuti wica mikorobe, hanyuma upfundikize na bandage isukuye. Andika inyamaswa n'igihe kugira ngo bifashe muganga." },
+   l2: { label: "Bigifite ingaruka", desc: "Ibikomere byimbitse, amaraso, cyangwa kurumwa n'inyamaswa itazwi cyangwa idafite nyir'ubwite", autoAction: "faculty",
+    steps: ["Ambara inzuzo (igikoresho #9).","Karaba igikomere neza , ntusukure cyane ibikomere byimbitse.","Shyiraho umuti wica mikorobe (igikoresho #5), pfundikiza na gaze isukuye (igikoresho #3).","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , genzura kubyimba, gutukura, cyangwa umuriro mu masaha 24 azaza , ibi bisaba kwitabwaho n'abaganga."],
+    speak: "Ku kurumwa kugifite ingaruka, ambara inzuzo, ukarabe igikomere neza udasukura cyane ibikomere byimbitse, ushyireho umuti wica mikorobe, hanyuma upfundikize na gaze isukuye. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe. Genzura kubyimba, gutukura, cyangwa umuriro.",
+    waitingSteps: ["Gumana igikomere gisukuye kandi gipfundikiye na gaze isukuye , ntukiyikure kugira ngo usuzume buri gihe.", "Genzura neza kubyimba, gutukura, ubushyuhe, cyangwa amabyi hafi y'aho warumwe.", "Genzura umuriro, kunyeganyega, cyangwa niba umuntu yumva nabi muri rusange.", "Zamura agace warumwemo niba bishoboka kugira ngo kubyimba kugabanuke.", "Andika neza igihe kurumwa byabereye n'inyamaswa yabikoze , ibi ni ngombwa mu isuzuma ry'akaga ka rabies.", "Muhumurize amahoro , mubwire ko ubutabazi buje."] },
+   l3: { label: "Bikaze", desc: "Amaraso menshi, igikomere kirekire cyangwa kinini, kurumwa mu maso, ku ijosi, cyangwa mu ntoki, cyangwa kurumwa n'inyamaswa yo mu ishyamba cyangwa itazwi", autoAction: "emergency",
+    steps: ["Ambara inzuzo (igikoresho #9) ako kanya.","Genzura amaraso menshi ukoresheje gaze ukanda neza (igikoresho #3).","NTUGERAGEZE gufunga igikomere cyimbitse wenyine.","Ubutabazi bwahamagawe ubu , kurumwa n'inyamaswa bisaba isuzuma ry'akaga ka rabies mu ivuriro uko byaba bikaze kose."],
+    speak: "Kurumwa gukaze. Ambara inzuzo ako kanya. Genzura amaraso menshi ukanda gaze neza. Ntugerageze gufunga igikomere wenyine. Ubutabazi bwahamagawe ubu , ibi bisaba isuzuma ry'akaga ka rabies mu ivuriro.",
+    waitingSteps: ["Komeza gukanda neza udahwema ku gikomere ukoresheje gaze , ntuyikure kugira ngo usuzume.", "NTUGERAGEZE gufunga cyangwa gudoda igikomere wenyine.", "Gumana umuntu adakoze kandi atuje , kunyeganyega birashobora gutuma amaraso yongera kuva.", "Andika neza igihe kurumwa byabereye n'inyamaswa yabikoze , ivuriro rizabikenera ku isuzuma ry'akaga ka rabies.", "Ntushyireho umuti uwo ariwo wose wo mu rugo , umwenda usukuye cyangwa gaze gusa.", "Muhumurize kandi umushyushye , ubutabazi buri mu nzira."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: komeza gukanda neza igikomere ukoresheje gaze. Ntugerageze kucyifunga wenyine. Gumana umuntu adakoze kandi atuje. Andika inyamaswa n'igihe cyo kurumwa ku bw'ivuriro." }
+  },
+  choking: {
+   question: "Kuniga bikaze bingana iki ?",
+   l1: { label: "Byoroheje , arashobora gukorora cyangwa kuvuga", desc: "Arakorora, arashobora kuvuga cyangwa guhumeka", autoAction: null,
+    steps: ["Mushishikarize gukomeza gukorora , uru ni uburyo umubiri usukura ubwawo.","Ntumukubite umugongo igihe akorora akoresha byiza.","Guma utuje kandi ukomeze kuguma hafi ye.","Niba gukorora kudakiza cyangwa adashobora kuvuga, huta ujye ku gukubita umugongo ako kanya."],
+    speak: "Niba akiri ashobora gukorora cyangwa kuvuga, mushishikarize gukomeza gukorora, uru ni uburyo umubiri usukura ubwawo. Ntumukubite umugongo igihe akorora akoresha byiza. Guma utuje kandi ukomeze kuguma hafi ye." },
+   l2: { label: "Bigifite ingaruka , gukorora kudakomeye", desc: "Gukorora kudakomeye, ntashobora gusukura umuhogo bihagije", autoAction: "faculty",
+    steps: ["Hagarara inyuma ye, umuhindukirize gato imbere.","Muhe inshuro 5 zikomeye z'ikubita umugongo hagati y'ibitugu ukoresheje ikiganza cyawe.","Niba ibyo bitagenze neza, kanda inda inshuro 5 , ikofe hejuru y'umukondo, ukurura imbere hejuru.","Ivuriro/umufasha w'ubuvuzi yamenyeshejwe , simbuka hagati y'inshuro 5 z'ikubita umugongo n'inshuro 5 zo gukanda inda kugeza bikize."],
+    speak: "Ku gukorora kudakomeye kutasukura umuhogo, hagarara inyuma ye, umuhindukirize imbere, hanyuma umuhe inshuro 5 zikomeye z'ikubita umugongo hagati y'ibitugu. Niba ibyo bitagenze neza, kanda inda inshuro 5. Ivuriro/umufasha w'ubuvuzi yamenyeshejwe. Simbuka kugeza bikize.",
+    waitingSteps: ["Komeza gusimbuka hagati y'inshuro 5 z'ikubita umugongo n'inshuro 5 zo gukanda inda , ntureke kugeza ikintu gikuweho cyangwa ashobora guhumeka neza.", "Genzura akanwa niba hari ikintu kigaragara hagati y'izo nshuro , kikure gusa niba ubona neza kandi ushobora kugikoraho.", "Guma utuje kandi ukomeze kuvugana nawe , ubwoba burushaho gufunga umuhogo.", "Niba adashobora gukorora, kuvuga, cyangwa guhumeka na gato, kanda Itangazo ako kanya.", "Niba atakaje ubwenge, muryamishe buhoro hasi hanyuma utangire RCP niba ufite ubumenyi.", "Komeza kureba , ubutabazi buri mu nzira."] },
+   l3: { label: "Bikaze , ntashobora guhumeka cyangwa atakaje ubwenge", desc: "Ntashobora guhumeka, ntashobora gukorora, ahindutse ubururu, cyangwa atakaje ubwenge", autoAction: "emergency",
+    steps: ["Kanda ITANGAZO ako kanya.","Niba atakaje ubwenge, muryamishe buhoro hasi hanyuma utangire gukanda igituza rya RCP niba ufite ubumenyi.","Genzura akanwa niba hari ikintu kigaragara mbere ya buri mpumuro, ariko ntukigereho urutoke mu buryo bw'igitangaza.","Komeza RCP kugeza ubutabazi bugeze cyangwa atangiye guhumeka."],
+    speak: "Kuniga gukaze. Kanda itangazo ako kanya. Niba atakaje ubwenge, muryamishe buhoro hasi hanyuma utangire RCP niba ufite ubumenyi. Genzura akanwa niba hari ikintu kigaragara mbere ya buri mpumuro, ariko ntukigereho urutoke mu buryo bw'igitangaza.",
+    waitingSteps: ["Niba atakaje ubwenge, komeza RCP , ukande igituza inshuro 30, uhe impumuro 2, subiramo.", "Genzura akanwa mu gihe gito mbere ya buri mpumuro , kura gusa ikintu ubona neza, ntukigereho mu buryo bw'igitangaza.", "Niba atangiye gukorora, guhumeka, cyangwa kunyeganyega, hagarika RCP hanyuma umushyire mu buryo bwo kuryama ku ruhande.", "NTUMUHE ikintu icyo aricyo cyose mu kanwa , nta mazi, nta byokurya.", "NTUMUSIGE WENYINE , hagomba kuguma umuntu we bose igihe cyose.", "Andika neza igihe kuniga byatangiriye , bibwire abaganga bagezeyo."],
+    waitingSpeak: "Ubutabazi bwahamagawe. Mu gihe utegereje: niba atakaje ubwenge, komeza RCP. Genzura akanwa mu gihe gito mbere ya buri mpumuro, ntukigereho mu buryo bw'igitangaza. Niba atangiye guhumeka, muryamishe ku ruhande. Ntumusige wenyine." }
+  }
+ }
 };
-
-// Override question text in French
-TRIAGE.fr.situations.bleeding.question = "Quelle est la gravité du saignement ?";
-TRIAGE.fr.situations.burn.question = "Quelle est la gravité de la brûlure ?";
-TRIAGE.fr.situations.headache.question = "Quelle est la gravité du mal de tête ?";
-TRIAGE.fr.situations.fainting.question = "Quel est l'état actuel de la personne ?";
-TRIAGE.fr.situations.allergic.question = "Quelle est la gravité de la réaction allergique ?";
-TRIAGE.fr.situations.sprain.question = "Quelle est la gravité de la blessure ?";
-TRIAGE.fr.situations.eyeinjury.question = "Quel type de blessure à l'œil ?";
-TRIAGE.fr.situations.nosebleed.question = "Quelle est la gravité du saignement de nez ?";
-TRIAGE.fr.situations.animalbite.question = "Quelle est la gravité de la morsure ?";
-TRIAGE.fr.situations.choking.question = "Quelle est la gravité de l'étouffement ?";
-
-// Override question text in Kinyarwanda
-TRIAGE.rw.situations.bleeding.question = "Amaraso avuye bingana iki ?";
-TRIAGE.rw.situations.burn.question = "Inkongi ikaze bingana iki ?";
-TRIAGE.rw.situations.headache.question = "Umutwe uribwa bingana iki ?";
-TRIAGE.rw.situations.fainting.question = "Umuntu ari mu bihe ?";
-TRIAGE.rw.situations.allergic.question = "Indwara y'aleriji ikaze bingana iki ?";
-TRIAGE.rw.situations.sprain.question = "Ibikomere bikaze bingana iki ?";
-TRIAGE.rw.situations.eyeinjury.question = "Ni ingorane iyihe y'ijisho ?";
-TRIAGE.rw.situations.nosebleed.question = "Amaraso y'amazuru akaze bingana iki ?";
-TRIAGE.rw.situations.animalbite.question = "Kurumwa bikaze bingana iki ?";
-TRIAGE.rw.situations.choking.question = "Kuniga bikaze bingana iki ?";
 
 // ── ANIMATION DATA ─────────────────────────────────────────────────────
 // Each situation has an array of SVG frames , one per guidance step.
@@ -2190,7 +2474,7 @@ function showTriageScreen(key, queue, totalMentioned, fuzzyTranscript) {
  document.getElementById('triageListenBox').classList.remove('hidden');
  document.getElementById('triageHeardBox').classList.add('hidden');
  document.getElementById('triageFallback').classList.add('hidden');
- document.getElementById('triageListenLabel').textContent = 'Listening...';
+ document.getElementById('triageListenLabel').textContent = tr('micListening');
 
  // Build fallback tap buttons (hidden unless voice fails)
  var opts = document.getElementById('triageOptions');
@@ -2219,31 +2503,29 @@ function showTriageScreen(key, queue, totalMentioned, fuzzyTranscript) {
  setStatus('Assessing: ' + s.label, 'idle');
 
  // Speak the triage question, then start listening for minor / moderate / severe
- var questionText = triageData.question + ' Say minor, moderate, or severe.';
+ var questionText = triageData.question + ' ' + tr('triageSayLevels');
  speakThenListen(questionText, function(transcript) {
   var level = matchTriageLevel(transcript);
   if (level) {
    // Show what was heard
-   var levelNames = { l1: 'Minor', l2: 'Moderate', l3: 'Severe' };
    document.getElementById('triageListenBox').classList.add('hidden');
    var heardBox = document.getElementById('triageHeardBox');
    heardBox.classList.remove('hidden');
    document.getElementById('triageHeardText').textContent =
-    'Heard: "' + transcript + '" → ' + levelNames[level];
+    tr('micHeard', { t: transcript }) + ' → ' + levels[level];
    // Small pause then act
    setTimeout(function() { handleTriageSelection(key, level); }, 700);
   } else {
    // Did not understand , show fallback buttons and try again once
-   document.getElementById('triageListenLabel').textContent = 'Say "minor", "moderate", or "severe"';
-   speakThenListen('Sorry, say minor, moderate, or severe.', function(t2) {
+   document.getElementById('triageListenLabel').textContent = tr('triageListenAgain');
+   speakThenListen(tr('triageSorryRepeat'), function(t2) {
     var l2 = matchTriageLevel(t2);
     if (l2) {
-     var levelNames2 = { l1: 'Minor', l2: 'Moderate', l3: 'Severe' };
      document.getElementById('triageListenBox').classList.add('hidden');
      var hb = document.getElementById('triageHeardBox');
      hb.classList.remove('hidden');
      document.getElementById('triageHeardText').textContent =
-      'Heard: "' + t2 + '" → ' + levelNames2[l2];
+      tr('micHeard', { t: t2 }) + ' → ' + levels[l2];
      setTimeout(function() { handleTriageSelection(key, l2); }, 700);
     } else {
      // Two failed attempts , show tap fallback
