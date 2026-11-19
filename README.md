@@ -1,81 +1,128 @@
-# SmartAid Kit — Next.js Prototype
+# SmartAid Kit
 
-This is your original SmartAid Kit HTML prototype, ported into a proper Next.js
-project so it's easier to version, deploy, and keep working on long-term.
+SmartAid Kit is a browser-based first-aid guidance prototype. It helps a user
+identify a situation, choose a severity level, follow visual and spoken
+step-by-step guidance, and escalate to a faculty member or clinic when needed.
+It also demonstrates first-aid supply tracking and restock alerts.
 
-## What's preserved
+> **Prototype notice:** This is an educational prototype, not a medical device
+> or a substitute for emergency services or professional medical advice. In a
+> real emergency, contact local emergency services.
 
-Every feature from the original single-file prototype is intact and unmodified:
+## Features
 
-- Voice input with fuzzy matching (Levenshtein distance) across all 8 emergency
-  types × 3 severity levels
-- 2.8" guided animation screen (SVG, synced to each step)
-- Tiered escalation: Assess → Help (faculty) → Emergency (clinic), with
-  waiting-step guidance and countdown timers
-- Automatic stock tracking: per-item quantities, thresholds, restock alerts,
-  and a kit setup screen
-- Voice engine options: browser TTS, ElevenLabs AI voice (bring your own API
-  key), or pre-recorded audio file upload
-- English / French / Kinyarwanda language switching
-- Activity log (demo data) for pitch/evidence purposes
+- Guided instructions for supported situations and severity levels, with
+  animated visuals.
+- Voice-based situation and severity selection, with on-screen buttons as an
+  alternative.
+- Escalation guidance for contacting faculty or a clinic.
+- English, French, and Kinyarwanda interface translations.
+- Browser speech, an optional online generated-voice service, and user-uploaded
+  audio options.
+- First-aid supply quantity tracking, low-stock thresholds, and restock alerts.
+- Kit setup and activity log screens for the prototype demonstration.
 
-## Why it's structured this way
+Voice recognition depends on browser support and microphone permission. Use a
+supported browser over `localhost` or HTTPS and allow microphone access.
+On-screen controls are available as an alternative. The app has no backend or
+database; prototype settings are stored in the browser.
 
-The original app is ~3,300 lines of interconnected, stateful JavaScript that
-manipulates the DOM directly (`getElementById`, `innerHTML`, event handlers
-wired via `onclick="..."`). Rewriting all of that into idiomatic React state
-in one pass would risk introducing bugs into logic that already works
-correctly.
+The optional online generated-voice service is an existing app feature and is
+not required to run the prototype. Its API key is entered and stored in the
+browser, not protected by a server. Do not enter a key that must remain secret.
 
-Instead, this project wraps the same markup and script inside a proper
-Next.js app, kept in three clearly separated pieces so it's easy to find
-your way around without touching anything by accident:
+## Requirements
 
-- **Markup** — `app/bodyMarkup.js`, the entire HTML body as one string,
-  mounted with `dangerouslySetInnerHTML` in `app/page.js`. Every element ID
-  the script depends on is preserved exactly. Structure only, no behavior.
-- **Styles** — `app/globals.css`. Appearance only, no behavior.
-- **Logic** — `public/smartaid-app.js`, served as a static script and loaded
-  via `next/script` with `strategy="afterInteractive"`, so it runs after the
-  markup above is in the DOM. This one file holds *all* app behavior: the
-  triage/situation content and translations, the voice engine, the stock
-  tracker, and every screen transition. It has a table of contents comment
-  block at the very top — search for any of its section banner titles
-  (e.g. `VOICE ENGINE SYSTEM`, `STOCK TRACKING ENGINE`) to jump straight to
-  that part.
+- Windows 10/11, macOS, or Linux.
+- Node.js 20.9 or later, which includes npm.
+- Git.
+- A current web browser. Chrome is recommended for voice recognition.
 
-There is **no backend/server** anywhere in this project — no API routes, no
-database. Everything above runs entirely in the browser; `app/page.js` and
-`app/layout.js` are just the minimal Next.js scaffolding required to serve
-the three files as a page.
+Check that Node.js, npm, and Git are installed:
 
-This structure means Next.js's project layout, `npm run build` for
-production bundling, and a clean path to real deployment (Vercel, Netlify,
-or any static host) are all available, with a clear path to further
-incremental refactoring (e.g. into React components) later if wanted.
-
-## Running it
-
-```bash
-npm install
-npm run dev
+```text
+node --version
+npm --version
+git --version
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in **Chrome** — voice
-input requires the Web Speech API, which is Chrome-only.
+## Install and run locally
 
-## Building for production
+1. Install Node.js 20.9 or later from [nodejs.org](https://nodejs.org/) and Git
+   from [git-scm.com](https://git-scm.com/downloads), if needed.
+2. Open PowerShell on Windows or a terminal on macOS/Linux.
+3. Clone this repository and enter its folder:
 
-```bash
+   ```sh
+   git clone https://github.com/Albert-Afiti/Smartaid-kit-Summative-.git
+   cd Smartaid-kit-Summative-
+   ```
+
+4. Install the exact dependencies listed in the lockfile:
+
+   ```sh
+   npm ci
+   ```
+
+5. Start the development server:
+
+   ```sh
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser. Leave
+   the terminal running while you use the app. If Next.js prints a different
+   local URL because port 3000 is busy, open that URL instead.
+7. To stop the development server, focus the terminal and press `Ctrl+C`.
+
+No environment variables or database setup are required.
+
+## Check the project
+
+From the project folder, run the linter:
+
+```sh
+npm run lint
+```
+
+Build and run the production version locally:
+
+```sh
 npm run build
 npm run start
 ```
 
-## Next steps if you want to keep evolving this
+Then open [http://localhost:3000](http://localhost:3000). Stop the production
+server with `Ctrl+C`.
 
-- If you eventually want real React state management (instead of direct DOM
-  manipulation), the next step would be incrementally moving pieces of
-  `public/smartaid-app.js` into React hooks — one screen/feature at a time —
-  rather than a single big rewrite.
-- The ElevenLabs integration expects an API key entered at runtime (stored
-  only in the browser) — nothing is hardcoded or committed here.
+## Deploy a public web version
+
+The repository is public, but a working public app URL must be created by
+deploying the project. One way to deploy this Next.js app is:
+
+1. Sign in to [Vercel](https://vercel.com/) and select **Add New Project**.
+2. Import the public GitHub repository
+   [Albert-Afiti/Smartaid-kit-Summative-](https://github.com/Albert-Afiti/Smartaid-kit-Summative-).
+3. Keep the detected Next.js framework settings. Use `npm ci` for dependency
+   installation and `npm run build` for the build command. No environment
+   variables are required.
+4. Select **Deploy** and wait for the deployment to finish.
+5. Open the public URL provided by the hosting service. Test the main screens,
+   buttons, language selector, and (in a supported browser) microphone access.
+6. Open the URL in a private/incognito browser window to confirm it is publicly
+   accessible. Include the verified URL in the summative submission document.
+
+When later changes are pushed to the connected branch, the hosting service can
+build and deploy them again.
+
+## Project layout
+
+- `app/page.js` mounts the prototype markup and loads its browser behavior.
+- `app/bodyMarkup.js` contains the page markup.
+- `app/globals.css` contains the application styles.
+- `public/smartaid-app.js` contains the interactions, guidance content, and
+  browser-side state.
+
+This prototype does not provide server-side persistence or send real alerts to
+emergency services. Treat its escalation screens and activity log as
+demonstration functionality.
