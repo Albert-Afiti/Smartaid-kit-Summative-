@@ -107,6 +107,32 @@ on-screen controls are available as an alternative.
 The Vercel deployment can be configured to build and deploy updates when
 changes are pushed to its connected GitHub repository and branch.
 
+## How to use the app
+
+1. Open the [live app](https://smartaid-kit-summative.vercel.app/) in a current
+   browser. For voice features, use a supported browser such as Chrome and
+   allow microphone access when prompted. You can use the on-screen controls
+   without a microphone.
+2. Choose a language with **EN**, **FR**, or **RW**. The app starts in English.
+3. To begin an assessment, either press **Assess** and describe what is
+   happening when prompted, or tap the matching situation in the supply tray.
+4. Answer the severity question by saying **Minor**, **Moderate**, or
+   **Severe**. If voice recognition is unavailable or does not understand,
+   choose the matching on-screen severity option.
+5. Follow the first-aid instructions and visual guide. Use **Repeat steps out
+   loud** to hear the instructions again, or **Back** to return to the home
+   screen.
+6. If more help is needed, use **Help** or **Emergency** and follow the
+   on-screen guidance. These are prototype demonstration flows: they do not
+   contact real staff, clinics, ambulances, or emergency services. Contact
+   local emergency services directly in a real emergency.
+7. To manage supplies, open **Setup** in the kit stock panel, change quantities
+   or the low-stock threshold, and save. The activity log can show demonstration
+   entries and activity from the current browser session.
+8. Optional voice settings are available in **Voice settings**. The browser
+   voice is the default. The other voice options are not required to use the
+   app; see the security note above before entering an API key.
+
 ## Project layout
 
 - `app/page.js` mounts the prototype markup and loads its browser behavior.
