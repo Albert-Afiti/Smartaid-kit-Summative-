@@ -56,8 +56,8 @@ git --version
 3. Clone this repository and enter its folder:
 
    ```sh
-   git clone https://github.com/Albert-Afiti/SMARTAID-KIT-.git
-   cd SMARTAID-KIT-
+   git clone https://github.com/Albert-Afiti/Smartaid-kit-Summative-.git
+   cd Smartaid-kit-Summative-
    ```
 
 4. Install the exact dependencies listed in the lockfile:
