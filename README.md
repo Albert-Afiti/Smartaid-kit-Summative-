@@ -5,6 +5,8 @@ identify a situation, choose a severity level, follow visual and spoken
 step-by-step guidance, and escalate to a faculty member or clinic when needed.
 It also demonstrates first-aid supply tracking and restock alerts.
 
+**Live app:** [smartaid-kit-summative.vercel.app](https://smartaid-kit-summative.vercel.app/)
+
 > **Prototype notice:** This is an educational prototype, not a medical device
 > or a substitute for emergency services or professional medical advice. In a
 > real emergency, contact local emergency services.
@@ -54,8 +56,8 @@ git --version
 3. Clone this repository and enter its folder:
 
    ```sh
-   git clone https://github.com/Albert-Afiti/Smartaid-kit-Summative-.git
-   cd Smartaid-kit-Summative-
+   git clone https://github.com/Albert-Afiti/SMARTAID-KIT-.git
+   cd SMARTAID-KIT-
    ```
 
 4. Install the exact dependencies listed in the lockfile:
@@ -95,25 +97,15 @@ npm run start
 Then open [http://localhost:3000](http://localhost:3000). Stop the production
 server with `Ctrl+C`.
 
-## Deploy a public web version
+## Hosted app
 
-The repository is public, but a working public app URL must be created by
-deploying the project. One way to deploy this Next.js app is:
+The app is deployed on Vercel and available at
+[https://smartaid-kit-summative.vercel.app/](https://smartaid-kit-summative.vercel.app/).
+Use a supported browser and allow microphone access for voice recognition;
+on-screen controls are available as an alternative.
 
-1. Sign in to [Vercel](https://vercel.com/) and select **Add New Project**.
-2. Import the public GitHub repository
-   [Albert-Afiti/Smartaid-kit-Summative-](https://github.com/Albert-Afiti/Smartaid-kit-Summative-).
-3. Keep the detected Next.js framework settings. Use `npm ci` for dependency
-   installation and `npm run build` for the build command. No environment
-   variables are required.
-4. Select **Deploy** and wait for the deployment to finish.
-5. Open the public URL provided by the hosting service. Test the main screens,
-   buttons, language selector, and (in a supported browser) microphone access.
-6. Open the URL in a private/incognito browser window to confirm it is publicly
-   accessible. Include the verified URL in the summative submission document.
-
-When later changes are pushed to the connected branch, the hosting service can
-build and deploy them again.
+The Vercel deployment can be configured to build and deploy updates when
+changes are pushed to its connected GitHub repository and branch.
 
 ## Project layout
 
